@@ -13,8 +13,6 @@ namespace TravelEquipmentRenting.Infrastructure.Data
         [Required]
         public DateTime StartDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
-
         [Required]
         [ForeignKey(nameof(Tenant))]
         public string TenantId { get; set; } = null!;
