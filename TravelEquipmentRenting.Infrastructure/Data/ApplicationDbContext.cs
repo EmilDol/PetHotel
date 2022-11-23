@@ -56,6 +56,7 @@ namespace TravelEquipmentRenting.Infrastructure.Data
                 .HasOne(f => f.Product)
                 .WithOne(f => f.Rental)
                 .OnDelete(DeleteBehavior.Restrict);
+
             builder.ApplyConfiguration(new CountryConfiguration());
             builder.ApplyConfiguration(new TownConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());

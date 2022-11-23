@@ -398,7 +398,7 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2753),
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7194),
                             Description = "Gianluigi Donnarumma Giancarlito PinocchLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
                             ImageUrl = "https://media.istockphoto.com/id/537373196/photo/trees-forming-a-heart.jpg?s=612x612&w=0&k=20&c=onZKNjkycICe4q2ZDnKi39z42Ax9tpZT7pph-2e5Seo=",
                             IsApproved = true,
@@ -410,8 +410,8 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("e97af452-0689-46a0-8739-04a880b25286"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2760),
-                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also",
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7200),
+                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has",
                             ImageUrl = "https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple-Shot-on-iPhone-macro-Guido-Cassanelli_inline.jpg.large.jpg",
                             IsApproved = false,
                             IsAvailable = true,
@@ -422,7 +422,7 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2763),
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7230),
                             Description = "Asdasdasdasdasd dasdhaoshgaifgvhqoudb aoidgaudgbiaf",
                             ImageUrl = "https://media.istockphoto.com/id/1216425366/photo/heart-and-soul.jpg?s=612x612&w=0&k=20&c=bj4RaFi61ToNPKaHfszM1ShMjl3Lf_Qg0FvhkV1eM0s=",
                             IsApproved = true,
@@ -482,7 +482,7 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         {
                             Id = new Guid("46b1c11e-dbd0-432a-9bbc-b9cf6d6adfd4"),
                             ProductId = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
-                            StartDate = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2998),
+                            StartDate = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7432),
                             TenantId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
                         });
                 });
@@ -572,16 +572,16 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "df5ff70c-16dd-49a3-abb0-20c31f907f6c",
+                            ConcurrencyStamp = "7f2b5f6e-a2d5-400d-8713-cbff3619f146",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "AGENT@MAIL.COM",
                             NormalizedUserName = "AGENT@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJS0VvS+BNTP9EHcnWHQvk4SYXeZzx45nt9kdnrC6IOjpcP3Q0k6ggc77pqON2vGfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC284mP9s4DLxCTIRzW+8CF91XtJqeymGbLWN+gHjYevhaWZsZb1woZtH+vEOqY0pA==",
                             PhoneNumber = "0882854999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8598268b-cf52-4a5a-b49f-2aeb83795343",
+                            SecurityStamp = "437cda30-9d1b-41f1-b5ca-4e49c67f336a",
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com",
                             FirstName = "Jamal",
@@ -592,16 +592,16 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b5a5f2d-6779-4d92-a323-b73d299e1a26",
+                            ConcurrencyStamp = "9209554c-4dc6-42c0-88ff-4f2fa537309e",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPGIhrJ3I3efCQMmn/KR7iav1xkXRaRLM9YbajRrCb1wMASL0+GAjtuOqmKqcwufHg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKSv7XuJGWRJHchH4wzOO17mLRdgVg8Z5r8jQf5YGiDk9zsc2REhHvq1bz7g+GUdqQ==",
                             PhoneNumber = "0884305667",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6980b9e3-d80c-4bed-acd6-637c265bf43f",
+                            SecurityStamp = "58ed6532-a9eb-46b9-92c7-f4afa8c858b2",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com",
                             FirstName = "Ivan",

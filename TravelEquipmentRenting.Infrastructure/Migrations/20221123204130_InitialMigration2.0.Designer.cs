@@ -12,8 +12,8 @@ using TravelEquipmentRenting.Infrastructure.Data;
 namespace TravelEquipmentRenting.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221121211837_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221123204130_InitialMigration2.0")]
+    partial class InitialMigration20
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -246,6 +246,23 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("39a87631-5fc3-4c14-b96f-dec2408600a5"),
+                            Name = "Beginer Friendly"
+                        },
+                        new
+                        {
+                            Id = new Guid("fed5527f-721f-43b7-ba3e-8d4160cc714c"),
+                            Name = "Shoes"
+                        },
+                        new
+                        {
+                            Id = new Guid("ae9f7553-eaae-45fe-8e15-12ec6187f980"),
+                            Name = "Winter suitable"
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Comment", b =>
@@ -279,6 +296,24 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("ReceiverId");
 
                     b.ToTable("Comments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("21fd2544-3246-48bb-be99-9981c44c8836"),
+                            AuthorId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Content = "He stole my wallet and refuses to give it back! He is a terrible person!",
+                            ReceiverId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            Title = "He stole my wallet"
+                        },
+                        new
+                        {
+                            Id = new Guid("b09e19e1-e970-47cc-ac48-c3f9d6bc6426"),
+                            AuthorId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            Content = "He owes me money and i decided to take them by force! He is a terrible white robber!",
+                            ReceiverId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Title = "He owes me money"
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Country", b =>
@@ -295,6 +330,23 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
+                            Name = "Bulgaria"
+                        },
+                        new
+                        {
+                            Id = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
+                            Name = "Germany"
+                        },
+                        new
+                        {
+                            Id = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
+                            Name = "Serbia"
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Product", b =>
@@ -304,9 +356,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateEdited")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -346,6 +395,44 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7194),
+                            Description = "Gianluigi Donnarumma Giancarlito PinocchLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+                            ImageUrl = "https://media.istockphoto.com/id/537373196/photo/trees-forming-a-heart.jpg?s=612x612&w=0&k=20&c=onZKNjkycICe4q2ZDnKi39z42Ax9tpZT7pph-2e5Seo=",
+                            IsApproved = true,
+                            IsAvailable = true,
+                            Name = "Espadrilles",
+                            OwnerId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            PricePerDay = 10m
+                        },
+                        new
+                        {
+                            Id = new Guid("e97af452-0689-46a0-8739-04a880b25286"),
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7200),
+                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has",
+                            ImageUrl = "https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple-Shot-on-iPhone-macro-Guido-Cassanelli_inline.jpg.large.jpg",
+                            IsApproved = false,
+                            IsAvailable = true,
+                            Name = "TestNotApproved",
+                            OwnerId = "dea12856-c198-4129-b3f3-b893d8395082",
+                            PricePerDay = 10m
+                        },
+                        new
+                        {
+                            Id = new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b"),
+                            DateAdded = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7230),
+                            Description = "Asdasdasdasdasd dasdhaoshgaifgvhqoudb aoidgaudgbiaf",
+                            ImageUrl = "https://media.istockphoto.com/id/1216425366/photo/heart-and-soul.jpg?s=612x612&w=0&k=20&c=bj4RaFi61ToNPKaHfszM1ShMjl3Lf_Qg0FvhkV1eM0s=",
+                            IsApproved = true,
+                            IsAvailable = true,
+                            Name = "Test1",
+                            OwnerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            PricePerDay = 25m
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ProductCategory", b =>
@@ -369,9 +456,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
@@ -394,6 +478,15 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("TenantId");
 
                     b.ToTable("Rentals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("46b1c11e-dbd0-432a-9bbc-b9cf6d6adfd4"),
+                            ProductId = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
+                            StartDate = new DateTime(2022, 11, 23, 20, 41, 29, 870, DateTimeKind.Utc).AddTicks(7432),
+                            TenantId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Town", b =>
@@ -415,6 +508,44 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Towns");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"),
+                            CountryId = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
+                            Name = "Veliko Tarnovo"
+                        },
+                        new
+                        {
+                            Id = new Guid("651dc286-24dd-473e-8099-a56ad3e7a6e2"),
+                            CountryId = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
+                            Name = "Sofia"
+                        },
+                        new
+                        {
+                            Id = new Guid("d3e30c24-857f-4cd0-ba75-b9accb4d7c9f"),
+                            CountryId = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
+                            Name = "Berlin"
+                        },
+                        new
+                        {
+                            Id = new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"),
+                            CountryId = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
+                            Name = "Frankfurt"
+                        },
+                        new
+                        {
+                            Id = new Guid("d6ce7d29-6f17-478d-af2f-b45fb212dd02"),
+                            CountryId = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
+                            Name = "Belgrad"
+                        },
+                        new
+                        {
+                            Id = new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"),
+                            CountryId = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
+                            Name = "Nis"
+                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ApplicationUser", b =>
@@ -431,7 +562,54 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<Guid>("TownId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("TownId");
+
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7f2b5f6e-a2d5-400d-8713-cbff3619f146",
+                            Email = "agent@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AGENT@MAIL.COM",
+                            NormalizedUserName = "AGENT@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC284mP9s4DLxCTIRzW+8CF91XtJqeymGbLWN+gHjYevhaWZsZb1woZtH+vEOqY0pA==",
+                            PhoneNumber = "0882854999",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "437cda30-9d1b-41f1-b5ca-4e49c67f336a",
+                            TwoFactorEnabled = false,
+                            UserName = "agent@mail.com",
+                            FirstName = "Jamal",
+                            LastName = "Frederick",
+                            TownId = new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c")
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9209554c-4dc6-42c0-88ff-4f2fa537309e",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKSv7XuJGWRJHchH4wzOO17mLRdgVg8Z5r8jQf5YGiDk9zsc2REhHvq1bz7g+GUdqQ==",
+                            PhoneNumber = "0884305667",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "58ed6532-a9eb-46b9-92c7-f4afa8c858b2",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com",
+                            FirstName = "Ivan",
+                            LastName = "Georgiev",
+                            TownId = new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -564,6 +742,17 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ApplicationUser", b =>
+                {
+                    b.HasOne("TravelEquipmentRenting.Infrastructure.Data.Town", "Town")
+                        .WithMany("Users")
+                        .HasForeignKey("TownId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Town");
+                });
+
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Category", b =>
                 {
                     b.Navigation("Products");
@@ -579,6 +768,11 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Rental");
+                });
+
+            modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Town", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ApplicationUser", b =>

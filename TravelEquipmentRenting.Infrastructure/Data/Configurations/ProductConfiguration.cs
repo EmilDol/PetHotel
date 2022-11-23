@@ -26,7 +26,7 @@ namespace TravelEquipmentRenting.Infrastructure.Data.Configurations
                     Id = Guid.Parse("e97af452-0689-46a0-8739-04a880b25286"),
                     DateAdded= DateTime.UtcNow,
                     Name = "TestNotApproved",
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also",
+                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has",
                     IsAvailable = true,
                     IsApproved = false,
                     ImageUrl = "https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple-Shot-on-iPhone-macro-Guido-Cassanelli_inline.jpg.large.jpg",
