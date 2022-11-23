@@ -22,8 +22,9 @@ namespace TravelEquipmentRenting.Infrastructure.Data
         [MinLength(5)]
         public string LastName { get; set; } = null!;
 
+        [Required]
         [ForeignKey(nameof(Town))]
-        public Guid? TownId { get; set; }
+        public Guid TownId { get; set; }
 
         public Town Town { get; set; }
 

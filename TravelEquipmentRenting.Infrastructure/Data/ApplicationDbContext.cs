@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+using TravelEquipmentRenting.Infrastructure.Data.Configurations;
+
 namespace TravelEquipmentRenting.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -54,6 +56,15 @@ namespace TravelEquipmentRenting.Infrastructure.Data
                 .HasOne(f => f.Product)
                 .WithOne(f => f.Rental)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new CountryConfiguration());
+            builder.ApplyConfiguration(new TownConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ProductCategoryConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
+            builder.ApplyConfiguration(new RentalConfiguration());
+
 
             base.OnModelCreating(builder);
         }

@@ -38,10 +38,6 @@ namespace TravelEquipmentRenting.Infrastructure.Data
         public DateTime DateAdded { get; set; }
 
         [Required]
-        public DateTime DateEdited { get; set; }
-
-        [Required]
-        //TODO Set default value
         public bool IsApproved { get; set; }
 
         [Required]

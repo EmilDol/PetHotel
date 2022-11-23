@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelEquipmentRenting.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using TravelEquipmentRenting.Infrastructure.Data;
 namespace TravelEquipmentRenting.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123151613_TownIdNotNullableInUsers")]
+    partial class TownIdNotNullableInUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,23 +246,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("39a87631-5fc3-4c14-b96f-dec2408600a5"),
-                            Name = "Beginer Friendly"
-                        },
-                        new
-                        {
-                            Id = new Guid("fed5527f-721f-43b7-ba3e-8d4160cc714c"),
-                            Name = "Shoes"
-                        },
-                        new
-                        {
-                            Id = new Guid("ae9f7553-eaae-45fe-8e15-12ec6187f980"),
-                            Name = "Winter suitable"
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Comment", b =>
@@ -294,24 +279,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("ReceiverId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("21fd2544-3246-48bb-be99-9981c44c8836"),
-                            AuthorId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            Content = "He stole my wallet and refuses to give it back! He is a terrible person!",
-                            ReceiverId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            Title = "He stole my wallet"
-                        },
-                        new
-                        {
-                            Id = new Guid("b09e19e1-e970-47cc-ac48-c3f9d6bc6426"),
-                            AuthorId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            Content = "He owes me money and i decided to take them by force! He is a terrible white robber!",
-                            ReceiverId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            Title = "He owes me money"
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Country", b =>
@@ -328,23 +295,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
-                            Name = "Bulgaria"
-                        },
-                        new
-                        {
-                            Id = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
-                            Name = "Germany"
-                        },
-                        new
-                        {
-                            Id = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
-                            Name = "Serbia"
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Product", b =>
@@ -354,6 +304,9 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateEdited")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -393,44 +346,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2753),
-                            Description = "Gianluigi Donnarumma Giancarlito PinocchLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-                            ImageUrl = "https://media.istockphoto.com/id/537373196/photo/trees-forming-a-heart.jpg?s=612x612&w=0&k=20&c=onZKNjkycICe4q2ZDnKi39z42Ax9tpZT7pph-2e5Seo=",
-                            IsApproved = true,
-                            IsAvailable = true,
-                            Name = "Espadrilles",
-                            OwnerId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            PricePerDay = 10m
-                        },
-                        new
-                        {
-                            Id = new Guid("e97af452-0689-46a0-8739-04a880b25286"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2760),
-                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also",
-                            ImageUrl = "https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple-Shot-on-iPhone-macro-Guido-Cassanelli_inline.jpg.large.jpg",
-                            IsApproved = false,
-                            IsAvailable = true,
-                            Name = "TestNotApproved",
-                            OwnerId = "dea12856-c198-4129-b3f3-b893d8395082",
-                            PricePerDay = 10m
-                        },
-                        new
-                        {
-                            Id = new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b"),
-                            DateAdded = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2763),
-                            Description = "Asdasdasdasdasd dasdhaoshgaifgvhqoudb aoidgaudgbiaf",
-                            ImageUrl = "https://media.istockphoto.com/id/1216425366/photo/heart-and-soul.jpg?s=612x612&w=0&k=20&c=bj4RaFi61ToNPKaHfszM1ShMjl3Lf_Qg0FvhkV1eM0s=",
-                            IsApproved = true,
-                            IsAvailable = true,
-                            Name = "Test1",
-                            OwnerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            PricePerDay = 25m
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ProductCategory", b =>
@@ -476,15 +391,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("TenantId");
 
                     b.ToTable("Rentals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("46b1c11e-dbd0-432a-9bbc-b9cf6d6adfd4"),
-                            ProductId = new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"),
-                            StartDate = new DateTime(2022, 11, 23, 16, 51, 33, 694, DateTimeKind.Utc).AddTicks(2998),
-                            TenantId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.Town", b =>
@@ -506,44 +412,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Towns");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"),
-                            CountryId = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
-                            Name = "Veliko Tarnovo"
-                        },
-                        new
-                        {
-                            Id = new Guid("651dc286-24dd-473e-8099-a56ad3e7a6e2"),
-                            CountryId = new Guid("46c40eab-c926-4d8d-a972-ef4e925eae4f"),
-                            Name = "Sofia"
-                        },
-                        new
-                        {
-                            Id = new Guid("d3e30c24-857f-4cd0-ba75-b9accb4d7c9f"),
-                            CountryId = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
-                            Name = "Berlin"
-                        },
-                        new
-                        {
-                            Id = new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"),
-                            CountryId = new Guid("ff00449c-58f1-45d3-9388-4ac2f5ce650d"),
-                            Name = "Frankfurt"
-                        },
-                        new
-                        {
-                            Id = new Guid("d6ce7d29-6f17-478d-af2f-b45fb212dd02"),
-                            CountryId = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
-                            Name = "Belgrad"
-                        },
-                        new
-                        {
-                            Id = new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"),
-                            CountryId = new Guid("24e0def5-4df1-4d23-a45b-4548f2c4c89b"),
-                            Name = "Nis"
-                        });
                 });
 
             modelBuilder.Entity("TravelEquipmentRenting.Infrastructure.Data.ApplicationUser", b =>
@@ -566,48 +434,6 @@ namespace TravelEquipmentRenting.Infrastructure.Migrations
                     b.HasIndex("TownId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "df5ff70c-16dd-49a3-abb0-20c31f907f6c",
-                            Email = "agent@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "AGENT@MAIL.COM",
-                            NormalizedUserName = "AGENT@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJS0VvS+BNTP9EHcnWHQvk4SYXeZzx45nt9kdnrC6IOjpcP3Q0k6ggc77pqON2vGfA==",
-                            PhoneNumber = "0882854999",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8598268b-cf52-4a5a-b49f-2aeb83795343",
-                            TwoFactorEnabled = false,
-                            UserName = "agent@mail.com",
-                            FirstName = "Jamal",
-                            LastName = "Frederick",
-                            TownId = new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c")
-                        },
-                        new
-                        {
-                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b5a5f2d-6779-4d92-a323-b73d299e1a26",
-                            Email = "guest@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "GUEST@MAIL.COM",
-                            NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPGIhrJ3I3efCQMmn/KR7iav1xkXRaRLM9YbajRrCb1wMASL0+GAjtuOqmKqcwufHg==",
-                            PhoneNumber = "0884305667",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "6980b9e3-d80c-4bed-acd6-637c265bf43f",
-                            TwoFactorEnabled = false,
-                            UserName = "guest@mail.com",
-                            FirstName = "Ivan",
-                            LastName = "Georgiev",
-                            TownId = new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
