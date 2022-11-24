@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
+using TravelEquipmentRenting.Core.Contracts;
+using TravelEquipmentRenting.Core.Services;
 using TravelEquipmentRenting.Infrastructure.Data;
 using TravelEquipmentRenting.Infrastructure.Data.Common;
 
@@ -10,6 +12,8 @@ var connectionString = builder.Configuration.GetConnectionString("SQLConnection"
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services
     .ConfigureApplicationCookie(options =>

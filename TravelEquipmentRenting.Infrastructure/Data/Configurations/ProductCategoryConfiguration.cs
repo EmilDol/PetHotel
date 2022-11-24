@@ -35,6 +35,8 @@ namespace TravelEquipmentRenting.Infrastructure.Data.Configurations
                     CategoryId = Guid.Parse("ae9f7553-eaae-45fe-8e15-12ec6187f980")
                 }
             };
+
+            builder.HasData(productCategory);
         }
     }
 }

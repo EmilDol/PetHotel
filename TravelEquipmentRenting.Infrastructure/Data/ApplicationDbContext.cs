@@ -36,7 +36,7 @@ namespace TravelEquipmentRenting.Infrastructure.Data
                 .Entity<Product>()
                 .Property(p => p.IsApproved)
                 .HasDefaultValue(false);
-            
+
             builder
                 .Entity<Product>()
                 .Property(p => p.IsAvailable)
@@ -46,7 +46,7 @@ namespace TravelEquipmentRenting.Infrastructure.Data
                 .HasOne(f => f.Author)
                 .WithMany(f => f.CommentsWritten)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder.Entity<Comment>()
                 .HasOne(f => f.Receiver)
                 .WithMany(f => f.CommentsReceived)
@@ -65,7 +65,6 @@ namespace TravelEquipmentRenting.Infrastructure.Data
             builder.ApplyConfiguration(new ProductCategoryConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new RentalConfiguration());
-
 
             base.OnModelCreating(builder);
         }
