@@ -31,5 +31,20 @@ namespace TravelEquipmentRenting.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MyProducts()
+        {
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var model = await products.Mine(userId);
+
+            return View(model);
+        }
     }
 }
