@@ -18,14 +18,10 @@ namespace TravelEquipmentRenting.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
-            if (userId == null)
-            {
-                return BadRequest();
-            }
 
             var model = await products.AllAsync(userId);
 
