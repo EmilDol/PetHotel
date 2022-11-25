@@ -22,12 +22,21 @@
                     <strong>Status:</strong> @product.IsApproved
                 </p>
                 <p>
-                    <strong>Categories: </strong> @product.CategoriesAsString
+                    <strong>Categories: </strong> 
+                    @if (product.Categories.Any())
+                    {
+                        @product.CategoriesAsString
+                    }
+                    else
+                    {
+                        <text>No categories</text>
+                    }
                 </p>
             </div>
 
-            <form class="input-group-sm" asp-route-movieId="@product.Id" asp-controller="Products" asp-action="Edit" method="post">
+            <form class="input-group-sm" asp-controller="Products" asp-action="Edit" method="get">
                 <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
+                <input type="hidden" name="id" value="@product.Id" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
         </div>
     }

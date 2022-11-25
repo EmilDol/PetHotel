@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TravelEquipmentRenting.Core.Contracts;
+using TravelEquipmentRenting.Core.Models;
 
 namespace TravelEquipmentRenting.Controllers
 {
@@ -41,6 +42,39 @@ namespace TravelEquipmentRenting.Controllers
             var model = await products.Mine(userId);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var model = await products.GetProductById(id);
+
+            if (model == null)
+            {
+                return BadRequest();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductEditViewModel model)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            if ((await products.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Product does not exist");
+
+                return View(model);
+            }
+
+            await products.Edit(model);
+
+            return RedirectToAction(nameof(MyProducts));
         }
     }
 }

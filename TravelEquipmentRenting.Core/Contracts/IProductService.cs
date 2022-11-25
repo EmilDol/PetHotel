@@ -6,5 +6,8 @@ namespace TravelEquipmentRenting.Core.Contracts
     {
         Task<IEnumerable<ProductAllViewModel>> AllAsync(string userId);
         Task<IEnumerable<ProductMineViewModel>> Mine(string userId);
+        Task<ProductEditViewModel> GetProductById(Guid id);
+        Task<bool> Exists(Guid id);
+        Task Edit(ProductEditViewModel model);
     }
 }
