@@ -7,22 +7,6 @@
 <div class="text-center row">
     @foreach (var product in Model)
     {
-        <div class="card col-4 m-3" style="width: 20rem;">
-            <img class="card-img-top mt-2" style="width: 18rem;"
-             src="@product.ImageUrl" alt="Book Image">
-            <div class="card-body">
-
-                <h5 class="card-title mt-1">@product.Name</h5>
-                <p class="mb-0">
-                    <strong>Description:</strong> @product.Description
-                </p>
-                <p class="mb-0"><strong>Owner Name:</strong> @product.OwnerName</p>
-                <p><strong>Categories: </strong> @product.CategoriesAsString</p>
-            </div>
-
-            <form class="input-group-sm" asp-route-movieId="@product.Id" asp-controller="Rentals" asp-action="Rent" method="post">
-                <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
-            </form>
-        </div>
+        <partial name="_AllProductDetailsPartial" model="product"/>
     }
 </div>

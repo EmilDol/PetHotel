@@ -4,10 +4,13 @@ namespace TravelEquipmentRenting.Core.Contracts
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductAllViewModel>> AllAsync(string userId);
+        Task<IEnumerable<ProductAllViewModel>> All(string userId);
         Task<IEnumerable<ProductMineViewModel>> Mine(string userId);
-        Task<ProductEditViewModel> GetProductById(Guid id);
+        Task<ProductEditViewModel> GetProductToEditById(Guid id);
         Task<bool> Exists(Guid id);
         Task Edit(ProductEditViewModel model);
+        Task<bool> BelongsTo(string userId, Guid id);
+        Task<ProductDetailsViewModel> GetProductDetailsById(Guid id);
+        Task<bool> IsApproved(Guid id);
     }
 }

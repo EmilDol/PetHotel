@@ -24,7 +24,7 @@ namespace TravelEquipmentRenting.Controllers
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            var model = await products.AllAsync(userId);
+            var model = await products.All(userId);
 
             return View(model);
         }
@@ -47,11 +47,27 @@ namespace TravelEquipmentRenting.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var model = await products.GetProductById(id);
+            if ((await products.Exists(id)) == false)
+            {
+                return BadRequest();
+            }
+
+            var model = await products.GetProductToEditById(id);
 
             if (model == null)
             {
                 return BadRequest();
+            }
+
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            if ((await products.BelongsTo(userId, id)) == false)
+            {
+                return Unauthorized();
             }
 
             return View(model);
@@ -74,6 +90,32 @@ namespace TravelEquipmentRenting.Controllers
             await products.Edit(model);
 
             return RedirectToAction(nameof(MyProducts));
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            if ((await products.Exists(id)) == false)
+            {
+                return BadRequest();
+            }
+            
+            if ((await products.IsApproved(id)) == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await products.GetProductDetailsById(id);
+
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (await products.BelongsTo(userId, id))
+            {
+                return Unauthorized();
+            }
+
+            return View(model);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TravelEquipmentRenting.Core.Services
             this.repo = repo;
         }
 
-        public async Task<IEnumerable<ProductAllViewModel>> AllAsync(string userId)
+        public async Task<IEnumerable<ProductAllViewModel>> All(string userId)
         {
             var model = await repo.All<Product>()
                 .Include(p => p.Owner)
@@ -42,6 +42,23 @@ namespace TravelEquipmentRenting.Core.Services
             }
 
             return model;
+        }
+
+        public async Task<bool> BelongsTo(string userId, Guid id)
+        {
+            var product = await repo.All<Product>().FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            if (product.OwnerId == userId)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task Edit(ProductEditViewModel model)
@@ -83,7 +100,36 @@ namespace TravelEquipmentRenting.Core.Services
             }
         }
 
-        public async Task<ProductEditViewModel> GetProductById(Guid id)
+        public async Task<ProductDetailsViewModel> GetProductDetailsById(Guid id)
+        {
+            var model = await repo.All<Product>()
+                .Include(p => p.Owner)
+                .Include(p => p.Categories)
+                .ThenInclude(p => p.Category)
+                .Select(p => new ProductDetailsViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    OwnerName = $"{p.Owner.FirstName} {p.Owner.LastName}",
+                    OwnerEmail = p.Owner.Email,
+                    OwnerPhone = p.Owner.PhoneNumber,
+                    PricePerDay = p.PricePerDay,
+                    DateAdded = p.DateAdded.ToString("D"),
+                    CategoriesAsString = string.Join(", ", p.Categories.Select(p => p.Category.Name).ToList())
+                })
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (model == null)
+            {
+                return null;
+            }
+
+            return model;
+        }
+
+        public async Task<ProductEditViewModel> GetProductToEditById(Guid id)
         {
             var model = await repo.All<Product>()
                  .Include(p => p.Owner)
@@ -119,6 +165,18 @@ namespace TravelEquipmentRenting.Core.Services
                 .ToListAsync();
 
             return model;
+        }
+
+        public async Task<bool> IsApproved(Guid id)
+        {
+            var product = await repo.All<Product>().FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            return product.IsApproved;
         }
 
         public async Task<IEnumerable<ProductMineViewModel>> Mine(string userId)
