@@ -55,17 +55,15 @@ namespace TravelEquipmentRenting.Core.Services
             product.IsApproved = false;
             product.Categories = new List<ProductCategory>();
 
-            foreach (var category in model.Categories)
+            foreach (var categoryId in model.CategoryCheckboxesFromUI)
             {
-                if (category.IsTagged)
-                {
+                
                     ProductCategory productCategory = new ProductCategory()
                     {
-                        CategoryId = category.Id,
+                        CategoryId = categoryId,
                         Product = product
                     };
                     product.Categories.Add(productCategory);
-                }
             }
 
             await repo.SaveChangesAsync();
@@ -115,7 +113,8 @@ namespace TravelEquipmentRenting.Core.Services
                 .Select(c => new CategoryViewModel
                 {
                     Id = c.Id,
-                    Name = c.Name
+                    Name = c.Name,
+                    IsTagged = model.CategoriesAdded.Contains(c.Id)
                 })
                 .ToListAsync();
 

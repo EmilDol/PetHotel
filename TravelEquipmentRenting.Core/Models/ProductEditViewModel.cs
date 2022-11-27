@@ -8,6 +8,7 @@ namespace TravelEquipmentRenting.Core.Models
         {
             Categories = new List<CategoryViewModel>();
             CategoriesAdded = new List<Guid>();
+            CategoryCheckboxesFromUI = new List<Guid>();
         }
 
         public Guid Id { get; set; }
@@ -38,5 +39,7 @@ namespace TravelEquipmentRenting.Core.Models
         public List<CategoryViewModel> Categories { get; set; } = null!;
 
         public List<Guid> CategoriesAdded { get; set; }
+
+        public List<Guid> CategoryCheckboxesFromUI { get; set; }
     }
 }

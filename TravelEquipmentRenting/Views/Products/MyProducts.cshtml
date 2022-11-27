@@ -7,37 +7,6 @@
 <div class="text-center row">
     @foreach (var product in Model)
     {
-        <div class="card col-4 m-3" style="width: 20rem;">
-            <img class="card-img-top mt-2" style="width: 18rem;"
-             src="@product.ImageUrl" alt="Book Image">
-            <div class="card-body">
-                <h5 class="card-title mt-1">@product.Name</h5>
-                <p class="mb-0">
-                    <strong>Description:</strong> @product.Description
-                </p>
-                <p class="mb-0">
-                    <strong>Is Rented:</strong> @product.IsAvailable
-                </p>
-                <p class="mb-0">
-                    <strong>Status:</strong> @product.IsApproved
-                </p>
-                <p>
-                    <strong>Categories: </strong> 
-                    @if (product.Categories.Any())
-                    {
-                        @product.CategoriesAsString
-                    }
-                    else
-                    {
-                        <text>No categories</text>
-                    }
-                </p>
-            </div>
-
-            <form class="input-group-sm" asp-controller="Products" asp-action="Edit" method="get">
-                <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
-                <input type="hidden" name="id" value="@product.Id" class="fs-6 btn btn-success mb-3 p-2" />
-            </form>
-        </div>
+        <partial name="_ProductDetailsPartial" model="product" />
     }
 </div>

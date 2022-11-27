@@ -68,7 +68,6 @@ namespace TravelEquipmentRenting.Controllers
             if ((await products.Exists(model.Id)) == false)
             {
                 ModelState.AddModelError("", "Product does not exist");
-
                 return View(model);
             }
 
