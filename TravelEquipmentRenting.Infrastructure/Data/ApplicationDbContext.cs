@@ -41,6 +41,16 @@ namespace TravelEquipmentRenting.Infrastructure.Data
                 .Entity<Product>()
                 .Property(p => p.IsAvailable)
                 .HasDefaultValue(true);
+            
+            builder
+                .Entity<Town>()
+                .Property(t => t.IsApproved)
+                .HasDefaultValue(false);
+            
+            builder
+                .Entity<Country>()
+                .Property(c => c.IsApproved)
+                .HasDefaultValue(false);
 
             builder.Entity<Comment>()
                 .HasOne(f => f.Author)

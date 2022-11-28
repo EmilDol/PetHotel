@@ -22,6 +22,9 @@ namespace TravelEquipmentRenting.Infrastructure.Data
         [ForeignKey(nameof(Country))]
         public Guid CountryId { get; set; }
 
+        [Required]
+        public bool IsApproved { get; set; }
+
         public Country Country { get; set; } = null!;
 
         public List<ApplicationUser> Users { get; set; }
