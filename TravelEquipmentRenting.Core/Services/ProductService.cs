@@ -16,6 +16,33 @@ namespace TravelEquipmentRenting.Core.Services
             this.repo = repo;
         }
 
+        public async Task Add(ProductAddViewModel model, string userId)
+        {
+            Guid id = Guid.NewGuid();
+
+            Product product = new Product
+            {
+                Id = id,
+                DateAdded = DateTime.UtcNow,
+                IsApproved = false,
+                IsAvailable = true,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Name = model.Name,
+                OwnerId = userId,
+                PricePerDay = model.PricePerDay,
+                Categories = model.CategoriesFormUI.Select(c => new ProductCategory
+                {
+                    CategoryId = c,
+                    ProductId = id
+                }).ToList()
+            };
+
+            await repo.AddAsync<Product>(product);
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<ProductAllViewModel>> All(string userId)
         {
             var model = await repo.All<Product>()
@@ -100,6 +127,19 @@ namespace TravelEquipmentRenting.Core.Services
             }
         }
 
+        public async Task<List<CategoryViewModel>> GetAllCategories()
+        {
+            var categories = await repo.All<Category>()
+                .Select(p => new CategoryViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+                .ToListAsync();
+
+            return categories;
+        }
+
         public async Task<ProductDetailsViewModel> GetProductDetailsById(Guid id)
         {
             var model = await repo.All<Product>()
@@ -155,14 +195,7 @@ namespace TravelEquipmentRenting.Core.Services
                 return null;
             }
 
-            model.Categories = await repo.All<Category>()
-                .Select(c => new CategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    IsTagged = model.CategoriesAdded.Contains(c.Id)
-                })
-                .ToListAsync();
+            model.Categories = await GetAllCategories();
 
             return model;
         }

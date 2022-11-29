@@ -12,5 +12,7 @@ namespace TravelEquipmentRenting.Core.Contracts
         Task<bool> BelongsTo(string userId, Guid id);
         Task<ProductDetailsViewModel> GetProductDetailsById(Guid id);
         Task<bool> IsApproved(Guid id);
+        Task Add(ProductAddViewModel model, string userId);
+        Task<List<CategoryViewModel>> GetAllCategories();
     }
 }

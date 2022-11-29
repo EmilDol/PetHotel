@@ -117,5 +117,28 @@ namespace TravelEquipmentRenting.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var model = new ProductAddViewModel();
+            model.Categories = await products.GetAllCategories();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(ProductAddViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await products.Add(model, userId);
+
+            return RedirectToAction(nameof(ProductsController.MyProducts));
+        }
     }
 }
