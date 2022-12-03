@@ -1,0 +1,25 @@
+﻿@using WebApp2022.Core.Models
+@model PetMineViewModel
+
+<div class="card col-4 m-3" style="width: 20rem;">
+    <img class="card-img-top mt-2" style="width: 18rem;"
+         src="@Model.ImageUrl" alt="Book Image">
+    <div class="card-body">
+        <h5 class="card-title mt-1">@Model.Name</h5>
+        <p class="mb-0">
+            <strong>Description:</strong> @Model.Description
+        </p>
+        <p class="mb-0">
+            <strong>Requirements:</strong> @Model.Requirements
+        </p>
+        <p><strong>Type: </strong> @Model.Type</p>
+        <p><strong>Status: </strong> @Model.IsApproved</p>
+    </div>
+
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Edit" method="get">
+        <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="WantWatching" method="get">
+        <input type="submit" value="WantWatching" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+</div>
