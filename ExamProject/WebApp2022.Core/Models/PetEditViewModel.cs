@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using WebApp2022.Infrastructure.Data.Enums;
-
 namespace WebApp2022.Core.Models
 {
     public class PetEditViewModel

@@ -1,0 +1,62 @@
+﻿@using WebApp2022.Core.Models
+@model PetEditViewModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" value="@Model.Name">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea rows="4" asp-for="Description" class="form-control" value="@Model.Description"></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Requirements"></label>
+                <textarea asp-for="Requirements" rows="4" class="form-control" value="@Model.Requirements"></textarea>
+                <span asp-validation-for="Requirements" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" value="@Model.ImageUrl">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Heigth"></label>
+                <input type="number" asp-for="Heigth" value="@Model.Heigth" class="form-control">
+                <span asp-validation-for="Heigth" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weigth"></label>
+                <input type="number" asp-for="Weigth" value="@Model.Weigth" class="form-control">
+                <span asp-validation-for="Weigth" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age"></label>
+                <input type="number" asp-for="Age" value="@Model.Age" class="form-control">
+                <span asp-validation-for="Age" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type"></label>
+                <select asp-for="Type" class="form-control">
+                    <option value="Dog" selected="@(Model.Type == "Dog")">Dog</option>
+                    <option value="Cat" selected="@(Model.Type == "Cat")">Cat</option>
+                    <option value="Bird" selected="@(Model.Type == "Bird")">Bird</option>
+                    <option value="Reptile" selected="@(Model.Type == "Reptile")">Reptile</option>
+                    <option value="Exotic" selected="@(Model.Type == "Exotic")">Exotic</option>
+                    <option value="Hamster" selected="@(Model.Type == "Hamster")">Hamster</option>
+                    <option value="Bugs" selected="@(Model.Type == "Bugs")">Bugs</option>
+                </select>
+                <span asp-validation-for="Type" class="small text-danger"></span>
+            </div>
+            
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
