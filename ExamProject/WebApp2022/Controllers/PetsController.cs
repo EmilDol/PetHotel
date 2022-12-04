@@ -20,7 +20,7 @@ namespace WebApp2022.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Index()
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -111,15 +111,14 @@ namespace WebApp2022.Controllers
             {
                 return Unauthorized();
             }
-
-            var model = await petService.GetDetailsById(id);
-
+            
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
             if (await petService.Owns(id, userId))
             {
                 return Unauthorized();
             }
+
+            var model = await petService.GetDetailsById(id);
 
             return View(model);
         }

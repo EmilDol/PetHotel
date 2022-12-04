@@ -58,8 +58,7 @@ namespace WebApp2022.Core.Services
                 .Where(p => p.OwnerId != userId &&
                     p.IsApproved == true &&
                     p.IsBabysittedNow == false &&
-                    p.NeedBabysitting == true &&
-                    p.Announcement != null)
+                    p.NeedBabysitting == true)
                 .Select(p => new PetAllViewModel
                 {
                     Id = p.Id,
@@ -127,8 +126,7 @@ namespace WebApp2022.Core.Services
             var model = await repository.All<Pet>()
                 .Where(p => p.IsApproved == true &&
                     p.IsBabysittedNow == false &&
-                    p.NeedBabysitting == true &&
-                    p.Announcement != null)
+                    p.NeedBabysitting == true)
                 .Include(p => p.Owner)
                 .Include(p => p.Announcement)
                 .Select(p => new PetDetailsViewModel
@@ -163,7 +161,8 @@ namespace WebApp2022.Core.Services
                     Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     Requirements = p.Requirements,
-                    Weigth = p.Weigth
+                    Weigth = p.Weigth,
+                    Type = p.Type.ToString()
                 })
                 .FirstOrDefaultAsync(p => p.Id == id);
 
