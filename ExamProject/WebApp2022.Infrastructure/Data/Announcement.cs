@@ -28,10 +28,5 @@ namespace WebApp2022.Infrastructure.Data
         public Guid PetId { get; set; }
 
         public Pet Pet { get; set; } = null!;
-
-        [ForeignKey(nameof(Babysitter))]
-        public string? BabysitterId { get; set; }
-
-        public ApplicationUser? Babysitter { get; set; }
     }
 }

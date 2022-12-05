@@ -1,0 +1,30 @@
+﻿@using WebApp2022.Core.Models.Announcements
+@model AnnouncementAddViewModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.PetId" />
+            <div class="form-group">
+                <label asp-for="DayStarting"></label>
+                <input type="date" asp-for="DayStarting" value="@DateTime.UtcNow.Date" class="form-control">
+                <span asp-validation-for="DayStarting" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayEnding"></label>
+                <input type="date" asp-for="DayEnding" value="@DateTime.UtcNow.Date" class="form-control">
+                <span asp-validation-for="DayEnding" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfferedPaying"></label>
+                <input asp-for="OfferedPaying" class="form-control">
+                <span asp-validation-for="OfferedPaying" class="small text-danger"></span>
+            </div>
+            
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

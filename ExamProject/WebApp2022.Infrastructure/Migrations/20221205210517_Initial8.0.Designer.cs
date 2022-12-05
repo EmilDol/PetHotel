@@ -12,8 +12,8 @@ using WebApp2022.Infrastructure.Data;
 namespace WebApp2022.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221203131624_Inital4.0")]
-    partial class Inital40
+    [Migration("20221205210517_Initial8.0")]
+    partial class Initial80
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -167,9 +167,6 @@ namespace WebApp2022.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BabysitterId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("DayEnding")
                         .HasColumnType("datetime2");
 
@@ -187,10 +184,6 @@ namespace WebApp2022.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BabysitterId")
-                        .IsUnique()
-                        .HasFilter("[BabysitterId] IS NOT NULL");
 
                     b.HasIndex("PetId")
                         .IsUnique();
@@ -285,7 +278,7 @@ namespace WebApp2022.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cbc51560-6097-4630-b439-82d687ee6464",
+                            ConcurrencyStamp = "f7f6f4bd-224e-4141-9760-c8543b23b257",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Jamal",
@@ -294,10 +287,10 @@ namespace WebApp2022.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "AGENT@MAIL.COM",
                             NormalizedUserName = "AGENT@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK0u7WTgfN4IZUC9H6LOIKPPWd8CruEa2Zq6T0RvJhi6KFuCIhqqubxEG8q2BWGd1w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP21DUpzXOK1fnGZkwrXRuqgQr0JyLns1QzEyFUxFzYwLle6bn8rLfslBKNrKiEzoQ==",
                             PhoneNumber = "0882854999",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bd36f97b-3597-4caa-89f5-0814079be78d",
+                            SecurityStamp = "2150b132-7520-4b19-9343-c761cb9acdb9",
                             TownId = new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"),
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
@@ -306,7 +299,7 @@ namespace WebApp2022.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d17bf306-536d-4a19-831f-6dc713faa209",
+                            ConcurrencyStamp = "f2360ff9-5553-4f9d-8a53-3c0e2ef28945",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -315,10 +308,10 @@ namespace WebApp2022.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOWtZjCPuLWoQL/gimCoOY0nxuxpsvzwQ+7WUIFDEpyDAJIt2rbYcC23GNMziKboPQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFOanxyXAW8LKnldknZVO1HW7NTrWhC8eNdovrQsptFY4n2KmChI5y35jJeRpkrmXg==",
                             PhoneNumber = "0884305667",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2fa1b4fe-0af0-4765-a335-bf8cfce6b45e",
+                            SecurityStamp = "9e6592fc-6833-4e03-91a6-a9834951c7ad",
                             TownId = new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"),
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
@@ -464,6 +457,33 @@ namespace WebApp2022.Infrastructure.Migrations
                     b.ToTable("Reports");
                 });
 
+            modelBuilder.Entity("WebApp2022.Infrastructure.Data.Request", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnnouncementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BabysitterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsConfirmed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnnouncementId");
+
+                    b.HasIndex("BabysitterId");
+
+                    b.ToTable("Requests");
+                });
+
             modelBuilder.Entity("WebApp2022.Infrastructure.Data.Town", b =>
                 {
                     b.Property<Guid>("Id")
@@ -576,17 +596,11 @@ namespace WebApp2022.Infrastructure.Migrations
 
             modelBuilder.Entity("WebApp2022.Infrastructure.Data.Announcement", b =>
                 {
-                    b.HasOne("WebApp2022.Infrastructure.Data.ApplicationUser", "Babysitter")
-                        .WithOne("BabysittedPet")
-                        .HasForeignKey("WebApp2022.Infrastructure.Data.Announcement", "BabysitterId");
-
                     b.HasOne("WebApp2022.Infrastructure.Data.Pet", "Pet")
                         .WithOne("Announcement")
                         .HasForeignKey("WebApp2022.Infrastructure.Data.Announcement", "PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Babysitter");
 
                     b.Navigation("Pet");
                 });
@@ -643,15 +657,34 @@ namespace WebApp2022.Infrastructure.Migrations
                     b.Navigation("ReportedUser");
                 });
 
+            modelBuilder.Entity("WebApp2022.Infrastructure.Data.Request", b =>
+                {
+                    b.HasOne("WebApp2022.Infrastructure.Data.Announcement", "Announcement")
+                        .WithMany()
+                        .HasForeignKey("AnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApp2022.Infrastructure.Data.ApplicationUser", "Babysitter")
+                        .WithMany("Requests")
+                        .HasForeignKey("BabysitterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Announcement");
+
+                    b.Navigation("Babysitter");
+                });
+
             modelBuilder.Entity("WebApp2022.Infrastructure.Data.ApplicationUser", b =>
                 {
-                    b.Navigation("BabysittedPet");
-
                     b.Navigation("CommentsReceived");
 
                     b.Navigation("CommentsWritten");
 
                     b.Navigation("Pets");
+
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("WebApp2022.Infrastructure.Data.Pet", b =>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp2022.Core.Models
+namespace WebApp2022.Core.Models.Pets
 {
     public class PetDetailsViewModel
     {

@@ -17,6 +17,7 @@ namespace WebApp2022.Infrastructure.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -26,6 +27,7 @@ namespace WebApp2022.Infrastructure.Data
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new ReportConfiguration());
             builder.ApplyConfiguration(new AnnouncmentConfiguration());
+            builder.ApplyConfiguration(new RequestConfiguration());
 
             base.OnModelCreating(builder);
         }

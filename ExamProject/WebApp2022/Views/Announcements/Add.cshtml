@@ -1,0 +1,15 @@
+﻿@using WebApp2022.Core.Models.Announcements
+@model AnnouncementAddViewModel
+
+@{
+    ViewBag.Title = "Add Announcement";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<partial name="_AnnouncementAddFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

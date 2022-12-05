@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp2022.Core.Models
+namespace WebApp2022.Core.Models.Announcements
 {
-    public class PetAllViewModel
+    public class AnnouncementAllViewModel
     {
         public Guid Id { get; set; }
 

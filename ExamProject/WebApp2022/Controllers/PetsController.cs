@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using WebApp2022.Core.Contracts;
-using WebApp2022.Core.Models;
+using WebApp2022.Core.Models.Pets;
 
 namespace WebApp2022.Controllers
 {
@@ -19,18 +19,7 @@ namespace WebApp2022.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Index()
-        {
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
-            var model = await petService.All(userId);
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Mine()
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -95,7 +84,7 @@ namespace WebApp2022.Controllers
 
             await petService.Edit(model);
 
-            return RedirectToAction(nameof(Mine));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -143,7 +132,7 @@ namespace WebApp2022.Controllers
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await petService.Add(model, userId);
 
-            return RedirectToAction(nameof(PetsController.Mine));
+            return RedirectToAction(nameof(PetsController.Index));
         }
     }
 }

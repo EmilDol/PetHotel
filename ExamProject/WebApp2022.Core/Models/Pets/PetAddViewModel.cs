@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp2022.Core.Models
+namespace WebApp2022.Core.Models.Pets
 {
-    public class PetEditViewModel
+    public class PetAddViewModel
     {
         public Guid Id { get; set; }
 
@@ -24,10 +24,6 @@ namespace WebApp2022.Core.Models
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateAdded { get; set; }
-
-        [Required]
         public double Heigth { get; set; }
 
         [Required]
@@ -37,6 +33,6 @@ namespace WebApp2022.Core.Models
         public int Age { get; set; }
 
         [Required]
-        public string Type { get; set; } = null!;
+        public string Type { get; set; }
     }
 }

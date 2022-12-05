@@ -1,11 +1,10 @@
-﻿using WebApp2022.Core.Models;
+﻿using WebApp2022.Core.Models.Announcements;
+using WebApp2022.Core.Models.Pets;
 
 namespace WebApp2022.Core.Contracts
 {
     public interface IPetService
     {
-        Task<List<PetAllViewModel>> All(string userId);
-
         Task<List<PetMineViewModel>> Mine(string userId);
 
         Task<bool> Exists(Guid id);

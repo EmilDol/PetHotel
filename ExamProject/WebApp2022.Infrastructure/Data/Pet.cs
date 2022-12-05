@@ -9,6 +9,11 @@ namespace WebApp2022.Infrastructure.Data
 {
     public class Pet
     {
+        public Pet()
+        {
+            Announcements = new List<Announcement>();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -59,6 +64,6 @@ namespace WebApp2022.Infrastructure.Data
         public AnimalType Type { get; set; }
 
         [InverseProperty(nameof(Data.Announcement.Pet))]
-        public Announcement? Announcement { get; set; }
+        public List<Announcement> Announcements { get; set; }
     }
 }

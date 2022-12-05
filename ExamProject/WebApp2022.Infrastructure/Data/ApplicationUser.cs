@@ -10,6 +10,8 @@ namespace WebApp2022.Infrastructure.Data
         public ApplicationUser()
         {
             CommentsWritten = new List<Comment>();
+            CommentsReceived = new List<Comment>();
+            Requests = new List<Request>();
         }
 
         [Required]
@@ -39,8 +41,8 @@ namespace WebApp2022.Infrastructure.Data
 
         [InverseProperty(nameof(Comment.Receiver))]
         public List<Comment> CommentsReceived { get; set; }
-
-        [InverseProperty(nameof(Announcement.Babysitter))]
-        public Announcement? BabysittedPet { get; set; }
+        
+        [InverseProperty(nameof(Request.Babysitter))]
+        public List<Request>? Requests { get; set; }
     }
 }

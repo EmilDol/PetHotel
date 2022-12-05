@@ -1,4 +1,4 @@
-﻿@using WebApp2022.Core.Models
+﻿@using WebApp2022.Core.Models.Pets
 @model PetMineViewModel
 
 <div class="card col-4 m-3" style="width: 20rem;">
@@ -19,7 +19,10 @@
     <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Edit" method="get">
         <input type="submit" value="Edit" class="fs-6 btn btn-success mb-3 p-2" />
     </form>
-    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="WantWatching" method="get">
-        <input type="submit" value="WantWatching" class="fs-6 btn btn-success mb-3 p-2" />
-    </form>
+    @if (Model.IsApproved == "Approved")
+    {
+        <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Announcements" asp-action="Add" method="get">
+            <input type="submit" value="Add announcement" class="fs-6 btn btn-success mb-3 p-2" />
+        </form>
+    }
 </div>
