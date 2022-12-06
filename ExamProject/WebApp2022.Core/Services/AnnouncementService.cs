@@ -69,6 +69,16 @@ namespace WebApp2022.Core.Services
             return model;
         }
 
+        public async Task<Guid> GetPetId(Guid id)
+        {
+            var petId = await repository.All<Announcement>()
+                .Where(a => a.Id == id)
+                .Select(a => a.PetId)
+                .FirstOrDefaultAsync();
+
+            return petId;
+        }
+
         public async Task<bool> HasAnnouncement(Guid petId, DateTime dayStarting, DateTime dayEnding)
         {
             var pet = await repository.All<Pet>().Include(p => p.Announcements).FirstOrDefaultAsync(p => p.Id == petId);

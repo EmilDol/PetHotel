@@ -105,7 +105,8 @@ namespace WebApp2022.Core.Services
                 .Include(p => p.Pet.Owner)
                 .Select(p => new PetDetailsViewModel
                 {
-                    Id = p.Pet.Id,
+                    Id = p.Id,
+                    PetId = p.Pet.Id,
                     Age = p.Pet.Age,
                     DateEndBabysitting = p.DayEnding.ToString("d"),
                     DateStartBabysitting = p.DayStarting.ToString("d"),
@@ -118,7 +119,7 @@ namespace WebApp2022.Core.Services
                     Weigth = p.Pet.Weigth,
                     Type = p.Pet.Type.ToString()
                 })
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.PetId == id);
 
             return model;
         }

@@ -6,6 +6,8 @@ namespace WebApp2022.Core.Models.Pets
     {
         public Guid Id { get; set; }
 
+        public Guid PetId { get; set; }
+
         public string Name { get; set; } = null!;
 
         public string Description { get; set; } = null!;

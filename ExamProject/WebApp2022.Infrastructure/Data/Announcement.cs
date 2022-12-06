@@ -7,6 +7,11 @@ namespace WebApp2022.Infrastructure.Data
 {
     public class Announcement
     {
+        public Announcement()
+        {
+            Request request = new Request();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -28,5 +33,7 @@ namespace WebApp2022.Infrastructure.Data
         public Guid PetId { get; set; }
 
         public Pet Pet { get; set; } = null!;
+
+        public List<Request> Requests { get; set; }
     }
 }
