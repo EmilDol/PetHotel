@@ -1,0 +1,20 @@
+﻿@using WebApp2022.Core.Models.Requests
+@model RequestsAllViewModel
+
+<div class="card col-4 m-3" style="width: 20rem;">
+    <div class="card-body">
+
+        <h5 class="card-title mt-1">@Model.OwnerName</h5>
+        <p class="mb-0">
+            <strong>Owner Email: </strong> @Model.OwnerEmail
+        </p>
+        <p><strong>Owner Phone: </strong> @Model.OwnerPhone</p>
+    </div>
+
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Requests" asp-action="Accept" method="get">
+        <input type="submit" value="Accept" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Requests" asp-action="Reject" method="get">
+        <input type="submit" value="Reject" class="fs-6 btn btn-danger mb-3 p-2" />
+    </form>
+</div>

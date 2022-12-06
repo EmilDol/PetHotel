@@ -1,0 +1,23 @@
+﻿@using WebApp2022.Core.Models.Requests
+@model IEnumerable<RequestsAllViewModel>
+
+@{
+    ViewBag.Title = "Requests";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var pet in Model)
+        {
+            <partial name="_AllRequestAtManageRequests" model="@pet" />
+        }
+    </div>
+}
+else
+{
+    <h3 class="text-center">No one has applied for this announcement yet!</h3>
+}

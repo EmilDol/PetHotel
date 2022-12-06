@@ -60,5 +60,24 @@ namespace WebApp2022.Core.Services
 
             return model;
         }
+
+        public async Task<Guid> GetAnnouncementId(Guid id)
+        {
+            var model = await repository.All<Request>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (model == null)
+            {
+                return Guid.Empty;
+            }
+
+            return model.AnnouncementId;
+        }
+
+        public async Task Reject(Guid id)
+        {
+            await repository.DeleteAsync<Request>(id);
+            await repository.SaveChangesAsync();
+        }
     }
 }

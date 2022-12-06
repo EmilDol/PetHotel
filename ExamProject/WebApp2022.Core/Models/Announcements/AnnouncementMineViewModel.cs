@@ -10,6 +10,8 @@
 
         public bool IsAvailable { get; set; }
 
+        public string Price { get; set; } = null!;
+
         public string DateStartBabysitting { get; set; } = null!;
 
         public string DateEndBabysitting { get; set; } = null!;

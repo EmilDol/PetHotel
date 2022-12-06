@@ -69,6 +69,19 @@ namespace WebApp2022.Core.Services
             return model;
         }
 
+        public async Task<bool> Exists(Guid id)
+        {
+            var model = await repository.All<Announcement>()
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (model == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<Guid> GetPetId(Guid id)
         {
             var petId = await repository.All<Announcement>()
@@ -118,6 +131,7 @@ namespace WebApp2022.Core.Services
                     ImageUrl = a.Pet.ImageUrl,
                     Id = a.Id,
                     Name = a.Pet.Name,
+                    Price = a.OfferedPaying.ToString(),
                     IsAvailable = a.IsAvailable
                 })
                 .ToListAsync();

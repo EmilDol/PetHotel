@@ -9,5 +9,6 @@ namespace WebApp2022.Core.Contracts
         Task<bool> HasAnnouncement(Guid petId, DateTime dayStarting, DateTime dayEnding);
         Task<List<AnnouncementMineViewModel>> Mine(string userId);
         Task<Guid> GetPetId(Guid id);
+        Task<bool> Exists(Guid id);
     }
 }

@@ -7,5 +7,7 @@ namespace WebApp2022.Core.Contracts
         Task Add(Guid annId, string userId);
         Task<List<RequestsAllViewModel>> All(Guid annId);
         Task<bool> Exists(Guid id, string userId);
+        Task Reject(Guid id);
+        Task<Guid> GetAnnouncementId(Guid id);
     }
 }
