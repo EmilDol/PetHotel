@@ -105,7 +105,7 @@ namespace WebApp2022.Core.Services
                 .Include(p => p.Pet.Owner)
                 .Select(p => new PetDetailsViewModel
                 {
-                    Id = p.Id,
+                    Id = p.Pet.Id,
                     Age = p.Pet.Age,
                     DateEndBabysitting = p.DayEnding.ToString("d"),
                     DateStartBabysitting = p.DayStarting.ToString("d"),

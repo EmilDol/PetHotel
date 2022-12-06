@@ -2,7 +2,6 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Announcements;
@@ -27,6 +26,16 @@ namespace WebApp2022.Controllers
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var model = await announcementService.All(userId);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            var model = await announcementService.Mine(userId);
 
             return View(model);
         }

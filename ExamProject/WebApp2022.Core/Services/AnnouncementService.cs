@@ -53,7 +53,7 @@ namespace WebApp2022.Core.Services
                     p.Pet.NeedBabysitting == true)
                 .Select(p => new AnnouncementAllViewModel
                 {
-                    Id = p.Id,
+                    Id = p.Pet.Id,
                     Name = p.Pet.Name,
                     Description = p.Pet.Description,
                     ImageUrl = p.Pet.ImageUrl,
@@ -94,6 +94,25 @@ namespace WebApp2022.Core.Services
                 }
             }
             return false;
+        }
+
+        public async Task<List<AnnouncementMineViewModel>> Mine(string userId)
+        {
+            var announcements = await repository.All<Announcement>()
+                .Include(a => a.Pet)
+                .Where(a => a.Pet.OwnerId == userId)
+                .Select(a => new AnnouncementMineViewModel
+                {
+                    DateEndBabysitting = a.DayEnding.ToString("d"),
+                    DateStartBabysitting = a.DayStarting.ToString("d"),
+                    ImageUrl = a.Pet.ImageUrl,
+                    Id = a.Id,
+                    Name = a.Pet.Name,
+                    IsAvailable = a.IsAvailable
+                })
+                .ToListAsync();
+
+            return announcements;
         }
     }
 }

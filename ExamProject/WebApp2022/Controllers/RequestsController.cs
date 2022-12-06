@@ -2,7 +2,7 @@
 
 namespace WebApp2022.Controllers
 {
-    public class AppointmentsController : Controller
+    public class RequestsController : Controller
     {
         public IActionResult Index()
         {

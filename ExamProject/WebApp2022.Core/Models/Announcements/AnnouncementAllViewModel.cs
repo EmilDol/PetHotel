@@ -21,6 +21,7 @@ namespace WebApp2022.Core.Models.Announcements
         public double Weigth { get; set; }
 
         public string Type { get; set; } = null!;
+
         public string DateEndBabysitting { get; set; } = null!;
     }
 }

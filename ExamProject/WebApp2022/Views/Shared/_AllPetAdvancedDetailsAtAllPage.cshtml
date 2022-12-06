@@ -3,7 +3,7 @@
 
 <div class="col-4 m-3" style="width: 20rem;">
     <img class="card-img-top mt-2" style="width: 18rem;"
-         src="@Model.ImageUrl" alt="Book Image">
+         src="@Model.ImageUrl" alt="Pet Image">
     <div class="card-body">
 
         <h5 class="card-title mt-1">@Model.Name</h5>
@@ -20,7 +20,7 @@
         <p><strong>Requirements: </strong> @Model.Requirements</p>
     </div>
 
-    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Appointments" asp-action="Add" method="get">
-        <input type="submit" value="Watch" class="fs-6 btn btn-success mb-3 p-2" />
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Requests" asp-action="Add" method="get">
+        <input type="submit" value="Apply" class="fs-6 btn btn-success mb-3 p-2" />
     </form>
 </div>
