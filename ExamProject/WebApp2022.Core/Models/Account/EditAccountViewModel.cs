@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using WebApp2022.Core.Models;
-
-namespace WebApp2022.Models
+namespace WebApp2022.Core.Models.Account
 {
-    public class RegisterViewModel
+    public class EditAccountViewModel
     {
-        public RegisterViewModel()
+        public EditAccountViewModel()
         {
             Towns = new List<TownViewModel>();
         }
@@ -21,16 +19,6 @@ namespace WebApp2022.Models
         [MaxLength(60)]
         [MinLength(5)]
         public string Email { get; set; } = null!;
-
-        [Required]
-        [MaxLength(20)]
-        [MinLength(5)]
-        [DataType(DataType.Password)]
-        public string Password { get; set; } = null!;
-
-        [Compare(nameof(Password))]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; } = null!;
 
         [Required]
         [DataType(DataType.PhoneNumber)]

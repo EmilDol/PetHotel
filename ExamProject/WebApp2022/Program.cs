@@ -27,6 +27,8 @@ builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
 builder.Services.AddScoped<IRequestsService, RequestsService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITownService, TownService>();
 
 var app = builder.Build();
 

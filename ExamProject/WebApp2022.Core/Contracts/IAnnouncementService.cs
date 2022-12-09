@@ -10,5 +10,7 @@ namespace WebApp2022.Core.Contracts
         Task<List<AnnouncementMineViewModel>> Mine(string userId);
         Task<Guid> GetPetId(Guid id);
         Task<bool> Exists(Guid id);
+        Task<bool> BelongsTo(Guid id, string userId);
+        Task Delete(Guid id);
     }
 }

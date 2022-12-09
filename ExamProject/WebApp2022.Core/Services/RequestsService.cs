@@ -17,6 +17,36 @@ namespace WebApp2022.Core.Services
             this.repository = repository;
         }
 
+        public async Task Accept(Guid id)
+        {
+            var model = await repository.All<Request>()
+                .Include(r => r.Announcement)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (model == null)
+            {
+                return;
+            }
+
+            model.IsConfirmed = true;
+            var idsToRemove = await repository.All<Request>()
+                .Where(r => r.AnnouncementId == model.AnnouncementId && r.Id != id)
+                .Select(r => r.Id)
+                .ToListAsync();
+
+            var announcement = await repository.All<Announcement>()
+                .FirstAsync(a => a.Id == model.AnnouncementId);
+
+            announcement.IsAvailable = false;
+
+            foreach (var idRemove in idsToRemove)
+            {
+                await repository.DeleteAsync<Request>(idRemove);
+            }
+
+            await repository.SaveChangesAsync();
+        }
+
         public async Task Add(Guid annId, string userId)
         {
             var request = new Request
@@ -76,6 +106,14 @@ namespace WebApp2022.Core.Services
 
         public async Task Reject(Guid id)
         {
+            var isConfirmed = await repository.All<Request>()
+                .Where(r => r.Id == id)
+                .Select(r => r.IsConfirmed)
+                .FirstAsync();
+            if (isConfirmed)
+            {
+                return;
+            }
             await repository.DeleteAsync<Request>(id);
             await repository.SaveChangesAsync();
         }

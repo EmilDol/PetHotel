@@ -1,7 +1,8 @@
-﻿@model RegisterViewModel
+﻿@using WebApp2022.Core.Models.Account
+@model EditAccountViewModel
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Edit Profile";
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -37,35 +38,24 @@
                 <span asp-validation-for="@Model.UserName" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
-                <label asp-for="@Model.Password">Password</label>
-                <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.Password" />
-                <span asp-validation-for="@Model.Password" class="text-danger"></span>
-            </div>
-            <div class="text-center mb-3">
-                <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
-                <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.ConfirmPassword" />
-                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="text-center mb-3">
                 <label asp-for="Town"></label>
                 <select asp-for="Town" class="form-control">
                     @foreach (var town in Model.Towns)
                     {
-                        bool isSelected = town.Name == "Veliko Tarnovo";
+                        bool isSelected = town.Id.ToString() == Model.Town;
                         <option value="@town.Id" selected="@isSelected">@town.Name</option>
                     }
                 </select>
                 <span asp-validation-for="Town" class="small text-danger"></span>
             </div>
             <div class="text-center">
-                <button id="registerSubmit" type="submit" class="btn btn-primary btn-success m-2">Register</button>
+                <button id="registerSubmit" type="submit" class="btn btn-primary btn-success m-2">Save</button>
             </div>
         </form>
         <div class="text-center">
             <form asp-action="Index" asp-controller="Towns" method="get">
                 <button type="submit" class="btn btn-secondary btn-danger m-2">My town is not an option</button>
             </form>
-
         </div>
     </div>
 </div>

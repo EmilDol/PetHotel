@@ -21,6 +21,7 @@ namespace WebApp2022.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -78,6 +79,23 @@ namespace WebApp2022.Controllers
             await announcementService.Add(model, userId);
 
             return RedirectToAction(nameof(PetsController.Index), "Pets");
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (!await announcementService.Exists(id))
+            {
+                return RedirectToAction(nameof(Mine));
+            }
+
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!await announcementService.BelongsTo(id, userId))
+            {
+                return RedirectToAction(nameof(Mine));
+            }
+            
+            await announcementService.Delete(id);
+            return RedirectToAction(nameof(Mine));
         }
     }
 }

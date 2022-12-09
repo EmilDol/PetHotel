@@ -50,7 +50,10 @@ namespace WebApp2022.Core.Services
                 .Where(p => p.Pet.OwnerId != userId &&
                     p.Pet.IsApproved == true &&
                     p.Pet.IsBabysittedNow == false &&
-                    p.Pet.NeedBabysitting == true)
+                    p.Pet.NeedBabysitting == true
+                    &&
+                    p.Requests.All(a => a.IsConfirmed == false)
+                    )
                 .Select(p => new AnnouncementAllViewModel
                 {
                     Id = p.Pet.Id,
@@ -67,6 +70,37 @@ namespace WebApp2022.Core.Services
                 .ToListAsync();
 
             return model;
+        }
+
+        public async Task<bool> BelongsTo(Guid id, string userId)
+        {
+            var model = await repository.All<Announcement>()
+                .Include(a => a.Pet)
+                .Where(a => a.Id == id)
+                .Select(a => a.Pet.OwnerId)
+                .FirstAsync();
+
+            if (model == userId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task Delete(Guid id)
+        {
+            var requestIds = await repository.All<Request>()
+                .Where(r => r.AnnouncementId == id)
+                .Select(r => r.Id)
+                .ToListAsync();
+            foreach (var requestId in requestIds)
+            {
+                await repository.DeleteAsync<Request>(requestId);
+            }
+            await repository.DeleteAsync<Announcement>(id);
+
+            await repository.SaveChangesAsync();
         }
 
         public async Task<bool> Exists(Guid id)

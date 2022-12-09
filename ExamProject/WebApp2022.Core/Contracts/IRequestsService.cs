@@ -9,5 +9,6 @@ namespace WebApp2022.Core.Contracts
         Task<bool> Exists(Guid id, string userId);
         Task Reject(Guid id);
         Task<Guid> GetAnnouncementId(Guid id);
+        Task Accept(Guid id);
     }
 }

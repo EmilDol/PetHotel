@@ -75,13 +75,28 @@ namespace WebApp2022.Controllers
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (await requestsService.Exists(id, userId))
             {
-                return RedirectToAction(nameof(AnnouncementsController.Index), "Announcements");
+                return RedirectToAction(nameof(RequestsController.Index), "Announcements");
             }
 
             var annId = await requestsService.GetAnnouncementId(id);
             await requestsService.Reject(id);
 
-            return RedirectToAction(nameof(AnnouncementsController.Index), "Requests", new {id = annId});
+            return RedirectToAction(nameof(RequestsController.Index), "Requests", new {id = annId});
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Accept(Guid id)
+        {
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (await requestsService.Exists(id, userId))
+            {
+                return RedirectToAction(nameof(RequestsController.Index), "Announcements");
+            }
+
+            var annId = await requestsService.GetAnnouncementId(id);
+            await requestsService.Accept(id);
+
+            return RedirectToAction(nameof(AnnouncementsController.Mine), "Announcements");
         }
     }
 }
