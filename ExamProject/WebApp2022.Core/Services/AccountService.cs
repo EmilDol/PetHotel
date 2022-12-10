@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Account;
+using WebApp2022.Core.Models.Comments;
 using WebApp2022.Infrastructure.Data;
 using WebApp2022.Infrastructure.Data.Common;
 
@@ -17,6 +17,36 @@ namespace WebApp2022.Core.Services
         {
             this.repository = repository;
             this.townService = townService;
+        }
+
+        public async Task<DetailsAccountViewModel> Details(string id)
+        {
+            var model = await repository.All<ApplicationUser>()
+                .Where(u => u.Id == id)
+                .Include(u => u.Town)
+                .Select(u => new DetailsAccountViewModel
+                {
+                    PhoneNumber = u.PhoneNumber,
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    Town = u.Town.Name,
+                    FullName = $"{u.FirstName} {u.LastName}",
+                    Id = u.Id
+                })
+                .FirstAsync();
+
+            model.Comments = await repository.All<Comment>()
+                .Where(c => c.ReceiverId == id)
+                .Include(c => c.Author)
+                .Select(c => new CommentUnderProfileViewModel
+                {
+                    Content = c.Content,
+                    Title = c.Title,
+                    Author = $"{c.Author.FirstName} {c.Author.LastName}"
+                })
+                .ToListAsync();
+
+            return model;
         }
 
         public async Task Edit(EditAccountViewModel model, string userId)
@@ -37,7 +67,18 @@ namespace WebApp2022.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<EditAccountViewModel> MapUserToViewModel(string userId)
+        public async Task<bool> Exists(string id)
+        {
+            var user = await repository.All<ApplicationUser>().FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<EditAccountViewModel> GetUserToEdit(string userId)
         {
             var user = await repository.All<ApplicationUser>().FirstAsync(u => u.Id == userId);
             var model = new EditAccountViewModel

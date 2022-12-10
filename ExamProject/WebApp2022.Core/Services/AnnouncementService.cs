@@ -47,6 +47,7 @@ namespace WebApp2022.Core.Services
             var model = await repository
                 .All<Announcement>()
                 .Include(p => p.Pet)
+                .OrderBy(a => a.DayStarting)
                 .Where(p => p.Pet.OwnerId != userId &&
                     p.Pet.IsApproved == true &&
                     p.Pet.IsBabysittedNow == false &&
@@ -56,7 +57,8 @@ namespace WebApp2022.Core.Services
                     )
                 .Select(p => new AnnouncementAllViewModel
                 {
-                    Id = p.Pet.Id,
+                    Id = p.Id,
+                    OwnerId = p.Pet.OwnerId,
                     Name = p.Pet.Name,
                     Description = p.Pet.Description,
                     ImageUrl = p.Pet.ImageUrl,
@@ -171,6 +173,35 @@ namespace WebApp2022.Core.Services
                 .ToListAsync();
 
             return announcements;
+        }
+
+        public async Task<AnnouncementDetailsViewModel> GetDetailsById(Guid id)
+        {
+            var model = await repository.All<Announcement>()
+                .Include(p => p.Pet)
+                .Where(p => p.Pet.IsApproved == true &&
+                    p.Pet.IsBabysittedNow == false &&
+                    p.Pet.NeedBabysitting == true)
+                .Include(p => p.Pet.Owner)
+                .Select(p => new AnnouncementDetailsViewModel
+                {
+                    Id = p.Id,
+                    PetId = p.Pet.Id,
+                    Age = p.Pet.Age,
+                    DateEndBabysitting = p.DayEnding.ToString("d"),
+                    DateStartBabysitting = p.DayStarting.ToString("d"),
+                    Description = p.Pet.Description,
+                    Heigth = p.Pet.Heigth,
+                    ImageUrl = p.Pet.ImageUrl,
+                    Name = p.Pet.Name,
+                    OwnerName = $"{p.Pet.Owner.FirstName} {p.Pet.Owner.LastName}",
+                    Requirements = p.Pet.Requirements,
+                    Weigth = p.Pet.Weigth,
+                    Type = p.Pet.Type.ToString()
+                })
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            return model;
         }
     }
 }

@@ -11,14 +11,14 @@
             <strong>Description:</strong> @Model.Description
         </p>
         <p><strong>Type: </strong> @Model.Type</p>
-        <p><strong>Owner Name: </strong> @Model.OwnerName</p>
+        <p><strong>Owner Name: </strong> <a asp-action="Details" asp-controller="Account" asp-route-id="@Model.OwnerId">@Model.OwnerName</a></p>
         <p><strong>Date Starting: </strong> @Model.DateStartBabysitting</p>
         <p><strong>Date Ending: </strong> @Model.DateEndBabysitting</p>
         <p><strong>Heigth: </strong> @Model.Heigth</p>
         <p><strong>Weigth: </strong> @Model.Weigth</p>
     </div>
 
-    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Details" method="get">
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Announcements" asp-action="Details" method="get">
         <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
     </form>
 </div>

@@ -1,0 +1,11 @@
+﻿@using WebApp2022.Core.Models.Announcements
+@model AnnouncementDetailsViewModel
+
+@{
+    ViewBag.Title = $"{@Model.Name} Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<partial name="_AllPetAdvancedDetailsAtAllPage" model="@Model"></partial>

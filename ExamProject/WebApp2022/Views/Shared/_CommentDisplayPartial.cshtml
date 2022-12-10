@@ -1,0 +1,14 @@
+﻿@using WebApp2022.Core.Models.Comments
+@model CommentUnderProfileViewModel
+
+<div class="card col-4 m-3" style="width: 20rem;">
+    <div class="card-body">
+        <h5 class="card-title mt-1">@Model.Title</h5>
+        <p class="mb-0">
+            @Model.Content
+        </p>
+        <p class="mb-0">
+            <strong>Author: </strong> @Model.Author
+        </p>
+    </div>
+</div>

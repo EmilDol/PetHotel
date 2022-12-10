@@ -131,7 +131,7 @@ namespace WebApp2022.Controllers
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            var user = await accountService.MapUserToViewModel(userId);
+            var user = await accountService.GetUserToEdit(userId);
             return View(user);
         }
 
@@ -145,6 +145,18 @@ namespace WebApp2022.Controllers
             string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await accountService.Edit(model, userId);
             return RedirectToAction(nameof(AnnouncementsController.Index), "Announcements");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            if (!await accountService.Exists(id))
+            {
+                return RedirectToAction(nameof(AnnouncementsController.Index), "Announcements");
+            }
+
+            var model = await accountService.Details(id);
+            return View(model);
         }
     }
 }

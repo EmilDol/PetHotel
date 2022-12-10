@@ -12,5 +12,6 @@ namespace WebApp2022.Core.Contracts
         Task<bool> Exists(Guid id);
         Task<bool> BelongsTo(Guid id, string userId);
         Task Delete(Guid id);
+        Task<AnnouncementDetailsViewModel> GetDetailsById(Guid id);
     }
 }

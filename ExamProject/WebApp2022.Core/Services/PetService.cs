@@ -95,35 +95,6 @@ namespace WebApp2022.Core.Services
             return true;
         }
 
-        public async Task<PetDetailsViewModel> GetDetailsById(Guid id)
-        {
-            var model = await repository.All<Announcement>()
-                .Include(p => p.Pet)
-                .Where(p => p.Pet.IsApproved == true &&
-                    p.Pet.IsBabysittedNow == false &&
-                    p.Pet.NeedBabysitting == true)
-                .Include(p => p.Pet.Owner)
-                .Select(p => new PetDetailsViewModel
-                {
-                    Id = p.Id,
-                    PetId = p.Pet.Id,
-                    Age = p.Pet.Age,
-                    DateEndBabysitting = p.DayEnding.ToString("d"),
-                    DateStartBabysitting = p.DayStarting.ToString("d"),
-                    Description = p.Pet.Description,
-                    Heigth = p.Pet.Heigth,
-                    ImageUrl = p.Pet.ImageUrl,
-                    Name = p.Pet.Name,
-                    OwnerName = $"{p.Pet.Owner.FirstName} {p.Pet.Owner.LastName}",
-                    Requirements = p.Pet.Requirements,
-                    Weigth = p.Pet.Weigth,
-                    Type = p.Pet.Type.ToString()
-                })
-                .FirstOrDefaultAsync(p => p.PetId == id);
-
-            return model;
-        }
-
         public async Task<PetEditViewModel> GetPetToEditById(Guid id)
         {
             var model = await repository.All<Pet>()

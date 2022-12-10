@@ -88,31 +88,6 @@ namespace WebApp2022.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Details(Guid id)
-        {
-            if ((await petService.Exists(id)) == false)
-            {
-                return BadRequest();
-            }
-
-            if ((await petService.IsApproved(id)) == false)
-            {
-                return Unauthorized();
-            }
-            
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (await petService.Owns(id, userId))
-            {
-                return Unauthorized();
-            }
-
-            var model = await petService.GetDetailsById(id);
-
-            return View(model);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Add()
         {
             var model = new PetAddViewModel();

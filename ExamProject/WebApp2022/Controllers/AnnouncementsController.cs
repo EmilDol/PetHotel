@@ -97,5 +97,20 @@ namespace WebApp2022.Controllers
             await announcementService.Delete(id);
             return RedirectToAction(nameof(Mine));
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            if ((await announcementService.Exists(id)) == false)
+            {
+                return BadRequest();
+            }
+
+            var model = await announcementService.GetDetailsById(id);
+
+            return View(model);
+        }
+
     }
 }

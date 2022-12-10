@@ -17,8 +17,6 @@ namespace WebApp2022.Core.Contracts
 
         Task<bool> IsApproved(Guid id);
 
-        Task<PetDetailsViewModel> GetDetailsById(Guid id);
-
         Task Add(PetAddViewModel model, string userId);
     }
 }
