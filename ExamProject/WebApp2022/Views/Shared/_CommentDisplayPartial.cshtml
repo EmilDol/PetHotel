@@ -8,7 +8,7 @@
             @Model.Content
         </p>
         <p class="mb-0">
-            <strong>Author: </strong> @Model.Author
+            <strong>Author: </strong> <a asp-action="Details" asp-controller="Account" asp-route-id="@Model.AuthorId">@Model.Author</a>
         </p>
     </div>
 </div>

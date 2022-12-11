@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Account;
+using WebApp2022.Core.Models.Comments;
 using WebApp2022.Infrastructure.Data;
 using WebApp2022.Models;
 
@@ -157,6 +158,46 @@ namespace WebApp2022.Controllers
 
             var model = await accountService.Details(id);
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Report(ReportAddViewModel model)
+        {
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Details), new { id = model.UserId });
+            }
+
+            if (model.UserId == userId)
+            {
+                return RedirectToAction(nameof(Details), new { id = model.UserId });
+            }
+
+            if (!await accountService.Exists(model.UserId))
+            {
+                return BadRequest();
+            }
+
+            await accountService.Report(model);
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        public async Task<IActionResult> AddComment(CommentAddViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Details), new { id = model.ReceiverId });
+            }
+
+            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (model.ReceiverId == userId)
+            {
+                return Unauthorized();
+            }
+
+            await accountService.AddComment(model, userId);
+            return RedirectToAction(nameof(Details), new { id = model.ReceiverId });
         }
     }
 }

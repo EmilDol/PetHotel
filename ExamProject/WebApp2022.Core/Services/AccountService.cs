@@ -19,6 +19,22 @@ namespace WebApp2022.Core.Services
             this.townService = townService;
         }
 
+        
+        public async Task AddComment(CommentAddViewModel model, string userId)
+        {
+            var comment = new Comment
+            {
+                AuthorId = userId,
+                Content = model.Content,
+                ReceiverId = model.ReceiverId,
+                Title = model.Title,
+                Id = Guid.NewGuid()
+            };
+
+            await repository.AddAsync(comment);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<DetailsAccountViewModel> Details(string id)
         {
             var model = await repository.All<ApplicationUser>()
@@ -42,7 +58,8 @@ namespace WebApp2022.Core.Services
                 {
                     Content = c.Content,
                     Title = c.Title,
-                    Author = $"{c.Author.FirstName} {c.Author.LastName}"
+                    Author = $"{c.Author.FirstName} {c.Author.LastName}",
+                    AuthorId = c.AuthorId
                 })
                 .ToListAsync();
 
@@ -93,6 +110,19 @@ namespace WebApp2022.Core.Services
             };
 
             return model;
+        }
+
+        public async Task Report(ReportAddViewModel model)
+        {
+            var report = new Report
+            {
+                Description = model.Description,
+                ReportedUserId = model.UserId,
+                Id = Guid.NewGuid()
+            };
+
+            await repository.AddAsync(report);
+            await repository.SaveChangesAsync();
         }
     }
 }

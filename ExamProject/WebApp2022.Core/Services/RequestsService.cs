@@ -65,15 +65,14 @@ namespace WebApp2022.Core.Services
         {
             var model = await repository.All<Request>()
                 .Where(r => r.AnnouncementId == annId)
-                .Include(r => r.Announcement)
-                .ThenInclude(a => a.Pet)
-                .ThenInclude(p => p.Owner)
+                .Include(r => r.Babysitter)
                 .Select(r => new RequestsAllViewModel
                 {
                     Id = r.Id,
-                    OwnerName = $"{r.Announcement.Pet.Owner.FirstName} {r.Announcement.Pet.Owner.LastName}",
-                    OwnerPhone = r.Announcement.Pet.Owner.PhoneNumber,
-                    OwnerEmail = r.Announcement.Pet.Owner.Email
+                    BabysitterId = r.BabysitterId,
+                    BabysitterName = $"{r.Babysitter.FirstName} {r.Babysitter.LastName}",
+                    BabysitterPhone = r.Babysitter.PhoneNumber,
+                    BabysitterEmail = r.Babysitter.Email
                 })
                 .ToListAsync();
 

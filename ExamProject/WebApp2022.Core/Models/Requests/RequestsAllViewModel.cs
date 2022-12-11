@@ -4,10 +4,12 @@
     {
         public Guid Id { get; set; }
 
-        public string OwnerName { get; set; } = null!;
+        public string BabysitterId { get; set; } = null!;
 
-        public string OwnerEmail { get; set; } = null!;
+        public string BabysitterName { get; set; } = null!;
 
-        public string OwnerPhone { get; set; } = null!;
+        public string BabysitterEmail { get; set; } = null!;
+
+        public string BabysitterPhone { get; set; } = null!;
     }
 }

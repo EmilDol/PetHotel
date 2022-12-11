@@ -7,5 +7,7 @@
         public string Content { get; set; } = null!;
 
         public string Author { get; set; } = null!;
+
+        public string AuthorId { get; set; } = null!;
     }
 }

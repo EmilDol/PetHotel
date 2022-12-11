@@ -23,7 +23,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Announcements" asp-action="Index">All Pets</a>
+                            <a class="nav-link text-dark" asp-controller="Announcements" asp-action="Index">All Announcements</a>
                         </li>
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
@@ -51,7 +51,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - WebApp2022 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - WebApp2022
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

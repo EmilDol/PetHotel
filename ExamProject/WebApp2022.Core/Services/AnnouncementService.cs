@@ -186,6 +186,7 @@ namespace WebApp2022.Core.Services
                 .Select(p => new AnnouncementDetailsViewModel
                 {
                     Id = p.Id,
+                    OwnerId = p.Pet.OwnerId,
                     PetId = p.Pet.Id,
                     Age = p.Pet.Age,
                     DateEndBabysitting = p.DayEnding.ToString("d"),

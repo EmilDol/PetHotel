@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApp2022.Core.Models.Announcements
+﻿namespace WebApp2022.Core.Models.Announcements
 {
     public class AnnouncementDetailsViewModel
     {
         public Guid Id { get; set; }
 
         public Guid PetId { get; set; }
+
+        public string OwnerId { get; set; } = null!;
 
         public string Name { get; set; } = null!;
 
