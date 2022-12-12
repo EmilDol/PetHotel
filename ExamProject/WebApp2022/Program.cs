@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Services;
+using WebApp2022.Extensions;
 using WebApp2022.Infrastructure.Data;
 using WebApp2022.Infrastructure.Data.Common;
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -29,6 +31,7 @@ builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
 builder.Services.AddScoped<IRequestsService, RequestsService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITownService, TownService>();
+builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
 
 var app = builder.Build();
 
@@ -52,9 +55,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "default",
+      pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+app.SeedAdmin();
 
 app.Run();

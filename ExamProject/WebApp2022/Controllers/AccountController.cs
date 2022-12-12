@@ -70,6 +70,7 @@ namespace WebApp2022.Controllers
 
             if (result.Succeeded)
             {
+                await userManager.AddToRoleAsync(user, "User");
                 return RedirectToAction(nameof(AccountController.Login), "Account");
             }
 

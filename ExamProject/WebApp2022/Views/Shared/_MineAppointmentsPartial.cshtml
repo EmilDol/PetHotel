@@ -1,0 +1,15 @@
+﻿@using WebApp2022.Core.Models.Appointments
+@model AppointmentAllViewModel
+
+<div class="card col-4 m-3" style="width: 20rem;">
+    <img class="card-img-top mt-2" style="width: 18rem;"
+         src="@Model.ImageUrl" alt="Book Image">
+    <div class="card-body">
+        <h5 class="card-title mt-1">@Model.PetName</h5>
+        <p><strong>Type: </strong> @Model.PetType</p>
+        <p><strong>Owner Name: </strong> <a asp-action="Details" asp-controller="Account" asp-route-id="@Model.OwnerId">@Model.OwnerName</a></p>
+        <p><strong>Date Starting: </strong> @Model.StartDate</p>
+        <p><strong>Date Ending: </strong> @Model.EndDate</p>
+        <p><strong>Owner phone: </strong> @Model.OwnerPhone</p>
+    </div>
+</div>

@@ -1,8 +1,11 @@
 ﻿@using WebApp2022.Core.Models.Announcements
-@model IEnumerable<AnnouncementAllViewModel>
-<div class="mb-5">
-    <h3 class="text-center text-success">Do the search here</h3>
-</div>
+@model List<AnnouncementAllViewModel>
+
+@{
+    ViewData["Title"] = "All Announcements";
+}
+
+<h1>@ViewData["Title"]</h1>
 
 <div class="text-center row">
     @foreach (var product in Model)

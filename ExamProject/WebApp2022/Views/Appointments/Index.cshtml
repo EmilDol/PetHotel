@@ -1,0 +1,15 @@
+﻿@using WebApp2022.Core.Models.Appointments
+@model List<AppointmentAllViewModel>
+
+@{
+    ViewData["Title"] = "My Appointments";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center row">
+    @foreach (var appointment in Model)
+    {
+        <partial name="_MineAppointmentsPartial" model="appointment"/>
+    }
+</div>
