@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
+using WebApp2022.Core.Contracts.Administration;
 using WebApp2022.Core.Services;
+using WebApp2022.Core.Services.Administration;
 using WebApp2022.Extensions;
 using WebApp2022.Infrastructure.Data;
 using WebApp2022.Infrastructure.Data.Common;
@@ -32,6 +34,7 @@ builder.Services.AddScoped<IRequestsService, RequestsService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITownService, TownService>();
 builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
+builder.Services.AddScoped<IApproveService, ApproveService>();
 
 var app = builder.Build();
 
@@ -58,13 +61,13 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-      name: "default",
-      pattern: "{controller=Home}/{action=Index}/{id?}"
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
     endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+      name: "default",
+      pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
 
