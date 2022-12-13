@@ -1,0 +1,15 @@
+﻿@using WebApp2022.Core.Models.Admin.Towns
+@model AllTownsApproveViewModel
+
+<div class="card col-4 m-3" style="width: 20rem;">
+    <div class="card-body">
+        <h5 class="card-title mt-1">@Model.Name</h5>
+    </div>
+
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Towns" asp-action="Approve" method="post">
+        <input type="submit" value="Approve" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+    <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Towns" asp-action="Reject" method="post">
+        <input type="submit" value="Reject" class="fs-6 btn btn-danger mb-3 p-2" />
+    </form>
+</div>

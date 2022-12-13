@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using WebApp2022.Core.Models;
+using WebApp2022.Core.Models.Towns;
 
 namespace WebApp2022.Models
 {

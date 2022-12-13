@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
-using WebApp2022.Core.Models;
+using WebApp2022.Core.Models.Towns;
 using WebApp2022.Infrastructure.Data;
 using WebApp2022.Infrastructure.Data.Common;
 

@@ -1,0 +1,22 @@
+﻿@using WebApp2022.Core.Models.Admin.Towns
+@model List<AllTownsApproveViewModel>
+
+@{
+    ViewData["Title"] = "Approve Towns";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center row">
+    @if (Model.Count >= 1)
+    {
+        @foreach (var town in Model)
+        {
+            <partial name="_TownApprovePartial" model="town" />
+        }
+    }
+    else
+    {
+        <h4>No towns waiting for you to approve now. Come back later to see.</h4>
+    }
+</div>

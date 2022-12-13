@@ -1,4 +1,4 @@
-﻿namespace WebApp2022.Core.Models
+﻿namespace WebApp2022.Core.Models.Towns
 {
     public class TownViewModel
     {
