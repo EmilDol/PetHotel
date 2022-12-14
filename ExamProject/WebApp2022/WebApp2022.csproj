@@ -20,9 +20,4 @@
     <ProjectReference Include="..\WebApp2022.Core\WebApp2022.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Data\" />
-    <Folder Include="Areas\Administration\Models\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,22 @@
+﻿@using WebApp2022.Core.Models.Admin.Pets
+@model List<AllPetsApproveViewModel>
+
+@{
+    ViewData["Title"] = "Pets waiting for approval";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center row">
+    @if (Model.Count >= 1)
+    {
+        @foreach (var pet in Model)
+        {
+            <partial name="_PetApprovePartial" model="pet" />
+        }
+    }
+    else
+    {
+        <h4>No pets waiting for approval</h4>
+    }
+</div>

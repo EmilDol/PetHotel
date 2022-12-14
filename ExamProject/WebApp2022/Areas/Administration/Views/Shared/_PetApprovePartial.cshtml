@@ -1,0 +1,25 @@
+﻿@using WebApp2022.Core.Models.Admin.Pets
+@model AllPetsApproveViewModel
+
+<div class="col-4 m-3 card" style="width: 20rem;">
+    <img class="card-img-top mt-2" style="width: 18rem;"
+         src="@Model.ImageUrl" alt="Pet Image">
+    <div class="card-body">
+
+        <h5 class="card-title mt-1">@Model.Name</h5>
+        <p class="mb-0">
+            <strong>Description:</strong> @Model.Description
+        </p>
+        <p><strong>Type: </strong> @Model.Type</p>
+        <p><strong>Heigth: </strong> @Model.Heigth</p>
+        <p><strong>Weigth: </strong> @Model.Weigth</p>
+        <p><strong>Age: </strong> @Model.Age</p>
+        <p><strong>Requirements: </strong> @Model.Requirements</p>
+    </div>
+    <form class="input-group-sm" asp-area="Administration" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Approve" method="post">
+        <input type="submit" value="Approve" class="fs-6 btn btn-success mb-3 p-2" />
+    </form>
+    <form class="input-group-sm" asp-area="Administration" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Reject" method="post">
+        <input type="submit" value="Reject" class="fs-6 btn btn-danger mb-3 p-2" />
+    </form>
+</div>
