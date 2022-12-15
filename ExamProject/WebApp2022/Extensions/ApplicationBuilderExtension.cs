@@ -29,7 +29,7 @@ namespace WebApp2022.Extensions
                     await roleManager.CreateAsync(userRole);
                 }
 
-                ApplicationUser admin = await userManager.FindByEmailAsync("admin@mail.com");
+                ApplicationUser admin = await userManager.FindByNameAsync("admin");
                 await userManager.AddToRoleAsync(admin, "Admin");
             })
             .GetAwaiter()

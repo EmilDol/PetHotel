@@ -16,7 +16,8 @@ namespace WebApp2022.Infrastructure.Data.Configurations
                 new Town
                 {
                     Id = Guid.Parse("658cfb89-2396-438d-baea-c10ef9ba492f"),
-                    Name = "Veliko Tarnovo"
+                    Name = "Veliko Tarnovo",
+                    IsApproved = true
                 },
                 new Town
                 {
@@ -26,12 +27,14 @@ namespace WebApp2022.Infrastructure.Data.Configurations
                 new Town
                 {
                     Id = Guid.Parse("d3e30c24-857f-4cd0-ba75-b9accb4d7c9f"),
-                    Name = "Lovech"
+                    Name = "Lovech",
+                    IsApproved = true
                 },
                 new Town
                 {
                     Id = Guid.Parse("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"),
-                    Name = "Pleven"
+                    Name = "Pleven",
+                    IsApproved = true
                 },
                 new Town
                 {
@@ -41,7 +44,8 @@ namespace WebApp2022.Infrastructure.Data.Configurations
                 new Town
                 {
                     Id = Guid.Parse("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"),
-                    Name = "Pavlikeni"
+                    Name = "Pavlikeni",
+                    IsApproved = true
                 }
             });
         }

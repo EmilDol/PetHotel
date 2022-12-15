@@ -47,11 +47,6 @@ namespace WebApp2022.Infrastructure.Data
         public bool IsApproved { get; set; }
 
         [Required]
-        public bool NeedBabysitting { get; set; }
-
-        public bool IsBabysittedNow { get; set; }
-
-        [Required]
         public double Heigth { get; set; }
 
         [Required]

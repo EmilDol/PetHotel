@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp2022.Infrastructure.Migrations
 {
-    public partial class Initial80 : Migration
+    public partial class Initial110 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -216,8 +216,6 @@ namespace WebApp2022.Infrastructure.Migrations
                     OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    NeedBabysitting = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    IsBabysittedNow = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     Heigth = table.Column<double>(type: "float", nullable: false),
                     Weigth = table.Column<double>(type: "float", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
@@ -229,25 +227,6 @@ namespace WebApp2022.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Pets_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reports",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReportedUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reports", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reports_AspNetUsers_ReportedUserId",
-                        column: x => x.ReportedUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -304,41 +283,107 @@ namespace WebApp2022.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Towns",
                 columns: new[] { "Id", "Name" },
+                values: new object[] { new Guid("651dc286-24dd-473e-8099-a56ad3e7a6e2"), "Sofia" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "IsApproved", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("651dc286-24dd-473e-8099-a56ad3e7a6e2"), "Sofia" },
-                    { new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"), "Veliko Tarnovo" },
-                    { new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"), "Pavlikeni" },
-                    { new Guid("d3e30c24-857f-4cd0-ba75-b9accb4d7c9f"), "Lovech" },
-                    { new Guid("d6ce7d29-6f17-478d-af2f-b45fb212dd02"), "Plovdiv" },
-                    { new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"), "Pleven" }
+                    { new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"), true, "Veliko Tarnovo" },
+                    { new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"), true, "Pavlikeni" },
+                    { new Guid("d3e30c24-857f-4cd0-ba75-b9accb4d7c9f"), true, "Lovech" }
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAvailable", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "f2360ff9-5553-4f9d-8a53-3c0e2ef28945", "guest@mail.com", false, "Ivan", false, "Georgiev", false, null, "GUEST@MAIL.COM", "GUEST@MAIL.COM", "AQAAAAEAACcQAAAAEFOanxyXAW8LKnldknZVO1HW7NTrWhC8eNdovrQsptFY4n2KmChI5y35jJeRpkrmXg==", "0884305667", false, "9e6592fc-6833-4e03-91a6-a9834951c7ad", new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"), false, "guest@mail.com" });
+                table: "Towns",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { new Guid("d6ce7d29-6f17-478d-af2f-b45fb212dd02"), "Plovdiv" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "IsApproved", "Name" },
+                values: new object[] { new Guid("db7127bc-1d68-4b3b-a523-a68a78b7e4a8"), true, "Pleven" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAvailable", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "f7f6f4bd-224e-4141-9760-c8543b23b257", "agent@mail.com", false, "Jamal", false, "Frederick", false, null, "AGENT@MAIL.COM", "AGENT@MAIL.COM", "AQAAAAEAACcQAAAAEP21DUpzXOK1fnGZkwrXRuqgQr0JyLns1QzEyFUxFzYwLle6bn8rLfslBKNrKiEzoQ==", "0882854999", false, "2150b132-7520-4b19-9343-c761cb9acdb9", new Guid("6fb2fef5-b16e-49dd-bfc4-8aef199df54c"), false, "agent@mail.com" });
+                values: new object[] { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "0e1a0da9-d610-4170-806d-4b97c086d137", "guest1@mail.com", false, "Ivan", false, "Georgiev", false, null, "GUEST1@MAIL.COM", "GUEST1", "AQAAAAEAACcQAAAAEHwNU3ZOdRtY1LE1Ilyuw8KnhXADXXyVBZtg06V3s9UJh+2hiAJK422qQI+24k+6Zg==", "0884305667", false, "8067ef5b-eb0b-4387-a7ee-4377bbf1a3ba", new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"), false, "guest1" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAvailable", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "72153552-7b85-4e34-b236-290e9bbad012", 0, "eee25b04-55ce-4a3e-bc87-f54fa97d1fb1", "guest2@mail.com", false, "Boyan", false, "Hristov", false, null, "GUEST2@MAIL.COM", "GUEST2", "AQAAAAEAACcQAAAAEGFvhVctu3igf51tljwV5B/CLP8yX9JwAedYBq1arD4G5u9OsnjewP1fkQJiBSRArw==", "0854993215", false, "121031f2-3337-49be-b2a3-58f4774b6ff8", new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"), false, "guest2" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsAvailable", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TownId", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "bf7afff5-d0dc-416e-83fc-01d89b1d5eb9", "admin@mail.com", false, "Petar", false, "Petrov", false, null, " ADMIN@MAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEM/i+9bvA8dzSoGxb5IXlMJ89jVZDXUmkWGFZVVeSt6CZ+ttvuNYa3hYI01K3hpoiQ==", "0882854999", false, "64bc7e30-be93-42bc-8104-b3aff3e80db0", new Guid("658cfb89-2396-438d-baea-c10ef9ba492f"), false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Comments",
                 columns: new[] { "Id", "AuthorId", "Content", "ReceiverId", "Title" },
-                values: new object[] { new Guid("21fd2544-3246-48bb-be99-9981c44c8836"), "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "He stole my wallet and refuses to give it back! He is a terrible person!", "dea12856-c198-4129-b3f3-b893d8395082", "He stole my wallet" });
+                values: new object[,]
+                {
+                    { new Guid("21fd2544-3246-48bb-be99-9981c44c8836"), "72153552-7b85-4e34-b236-290e9bbad012", "Very good babysitter for pets. Would recommend if you need a babysitter for a couple of days!", "dea12856-c198-4129-b3f3-b893d8395082", "Great babysitter" },
+                    { new Guid("2892e4f0-4e16-4323-8f7c-076bcc74579e"), "dea12856-c198-4129-b3f3-b893d8395082", "He returned my cat ill and starving! He had beaten up my cat!", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Worst babysitter" },
+                    { new Guid("6f49aa38-a113-4f20-a077-9208099578ae"), "dea12856-c198-4129-b3f3-b893d8395082", "He didn't just watch after my parrot, but even taugth him new words and songs!", "72153552-7b85-4e34-b236-290e9bbad012", "Can't complain" },
+                    { new Guid("b09e19e1-e970-47cc-ac48-c3f9d6bc6426"), "dea12856-c198-4129-b3f3-b893d8395082", "I hired Ivan to watch after my gold fish, but he killed it! He is a terrible babysitter!", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "Don't recommend" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "Id", "AuthorId", "Content", "ReceiverId", "Title" },
-                values: new object[] { new Guid("b09e19e1-e970-47cc-ac48-c3f9d6bc6426"), "dea12856-c198-4129-b3f3-b893d8395082", "He owes me money and i decided to take them by force! He is a terrible white robber!", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "He owes me money" });
+                table: "Pets",
+                columns: new[] { "Id", "Age", "DateAdded", "Description", "Heigth", "ImageUrl", "Name", "OwnerId", "Requirements", "Type", "Weigth" },
+                values: new object[] { new Guid("38237218-53e9-413e-ade3-49b4a122922f"), 42, new DateTime(2022, 12, 14, 22, 21, 44, 491, DateTimeKind.Utc).AddTicks(3620), "Horsey. She big and likes balconies. She the beloved wife of Juan", 2.8500000000000001, "https://i.redd.it/4kc2skyohqx51.jpg", "Juanita", "72153552-7b85-4e34-b236-290e9bbad012", "Every evening she needs to hear her husband Juan", 2, 300.0 });
+
+            migrationBuilder.InsertData(
+                table: "Pets",
+                columns: new[] { "Id", "Age", "DateAdded", "Description", "Heigth", "ImageUrl", "IsApproved", "Name", "OwnerId", "Requirements", "Type", "Weigth" },
+                values: new object[,]
+                {
+                    { new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3"), 3, new DateTime(2022, 12, 14, 22, 21, 44, 491, DateTimeKind.Utc).AddTicks(3606), "Gianluigi Donnarumma Giancarlito PinocchLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the", 0.29999999999999999, "https://media.istockphoto.com/id/537373196/photo/trees-forming-a-heart.jpg?s=612x612&w=0&k=20&c=onZKNjkycICe4q2ZDnKi39z42Ax9tpZT7pph-2e5Seo=", true, "Mishi", "dea12856-c198-4129-b3f3-b893d8395082", "Needs to be played with and weekly beautition session", 1, 4.0 },
+                    { new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b"), 69, new DateTime(2022, 12, 14, 22, 21, 44, 491, DateTimeKind.Utc).AddTicks(3617), "Horsey. He big and likes balconies.", 3.0, "https://i.kym-cdn.com/entries/icons/original/000/035/644/juancover.jpg", true, "Juan", "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", "He needs immediate access to every balcony in perementar of 1 km and to to his wife Juanita", 3, 420.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Pets",
+                columns: new[] { "Id", "Age", "DateAdded", "Description", "Heigth", "ImageUrl", "Name", "OwnerId", "Requirements", "Type", "Weigth" },
+                values: new object[] { new Guid("e97af452-0689-46a0-8739-04a880b25286"), 36, new DateTime(2022, 12, 14, 22, 21, 44, 491, DateTimeKind.Utc).AddTicks(3612), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has", 1.5, "https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple-Shot-on-iPhone-macro-Guido-Cassanelli_inline.jpg.large.jpg", "Pablo", "72153552-7b85-4e34-b236-290e9bbad012", "Every second full noon he goes to Tsvetelina Yaneva's concert", 6, 5.0 });
+
+            migrationBuilder.InsertData(
+                table: "Announcements",
+                columns: new[] { "Id", "DayEnding", "DayStarting", "IsAvailable", "OfferedPaying", "PetId" },
+                values: new object[] { new Guid("15d01d36-951f-4599-a747-a4a4fd38d7b4"), new DateTime(2023, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 150m, new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b") });
+
+            migrationBuilder.InsertData(
+                table: "Announcements",
+                columns: new[] { "Id", "DayEnding", "DayStarting", "IsAvailable", "OfferedPaying", "PetId" },
+                values: new object[] { new Guid("7c712e77-a568-415c-ad7f-10ab554cd6e4"), new DateTime(2022, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 3000m, new Guid("96d4e994-9559-48cb-b9c1-8eb77a96099b") });
+
+            migrationBuilder.InsertData(
+                table: "Announcements",
+                columns: new[] { "Id", "DayEnding", "DayStarting", "IsAvailable", "OfferedPaying", "PetId" },
+                values: new object[] { new Guid("a8f31fcf-57af-432a-9f2e-c6856ee41031"), new DateTime(2023, 3, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), true, 400m, new Guid("4b8ec921-8cd7-4020-bbc3-e31e6d40aee3") });
+
+            migrationBuilder.InsertData(
+                table: "Requests",
+                columns: new[] { "Id", "AnnouncementId", "BabysitterId", "IsConfirmed" },
+                values: new object[] { new Guid("00ff1a5f-8b2f-4b84-999e-e524da8f461a"), new Guid("15d01d36-951f-4599-a747-a4a4fd38d7b4"), "dea12856-c198-4129-b3f3-b893d8395082", true });
+
+            migrationBuilder.InsertData(
+                table: "Requests",
+                columns: new[] { "Id", "AnnouncementId", "BabysitterId" },
+                values: new object[,]
+                {
+                    { new Guid("01f39c0e-1b4a-4200-9469-094175666e4d"), new Guid("a8f31fcf-57af-432a-9f2e-c6856ee41031"), "72153552-7b85-4e34-b236-290e9bbad012" },
+                    { new Guid("52cfc479-066a-4772-94f0-c24826f9b357"), new Guid("7c712e77-a568-415c-ad7f-10ab554cd6e4"), "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e" },
+                    { new Guid("f0207fe1-af72-48de-88c3-28e76f33f588"), new Guid("7c712e77-a568-415c-ad7f-10ab554cd6e4"), "dea12856-c198-4129-b3f3-b893d8395082" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Announcements_PetId",
                 table: "Announcements",
-                column: "PetId",
-                unique: true);
+                column: "PetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -400,11 +445,6 @@ namespace WebApp2022.Infrastructure.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportedUserId",
-                table: "Reports",
-                column: "ReportedUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Requests_AnnouncementId",
                 table: "Requests",
                 column: "AnnouncementId");
@@ -434,9 +474,6 @@ namespace WebApp2022.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "Reports");
 
             migrationBuilder.DropTable(
                 name: "Requests");

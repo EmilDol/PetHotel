@@ -25,9 +25,6 @@ namespace WebApp2022.Core.Services
                 return;
             }
 
-            pet.NeedBabysitting = true;
-            pet.IsBabysittedNow = false;
-
             var announcement = new Announcement
             {
                 OfferedPaying = model.OfferedPaying,
@@ -44,32 +41,60 @@ namespace WebApp2022.Core.Services
 
         public async Task<List<AnnouncementAllViewModel>> All(string userId)
         {
-            var model = await repository
-                .All<Announcement>()
-                .Include(p => p.Pet)
-                .OrderBy(a => a.DayStarting)
-                .Where(p => p.Pet.OwnerId != userId &&
-                    p.Pet.IsApproved == true &&
-                    p.Pet.IsBabysittedNow == false &&
-                    p.Pet.NeedBabysitting == true
-                    &&
-                    p.Requests.All(a => a.IsConfirmed == false)
-                    )
-                .Select(p => new AnnouncementAllViewModel
-                {
-                    Id = p.Id,
-                    OwnerId = p.Pet.OwnerId,
-                    Name = p.Pet.Name,
-                    Description = p.Pet.Description,
-                    ImageUrl = p.Pet.ImageUrl,
-                    Heigth = p.Pet.Heigth,
-                    Weigth = p.Pet.Heigth,
-                    Type = p.Pet.Type.ToString(),
-                    DateStartBabysitting = p.DayStarting.ToString("d"),
-                    DateEndBabysitting = p.DayEnding.ToString("d"),
-                    OwnerName = $"{p.Pet.Owner.FirstName} {p.Pet.Owner.LastName}"
-                })
-                .ToListAsync();
+            var user = await repository.All<ApplicationUser>().FirstOrDefaultAsync(u => u.Id == userId);
+            List<AnnouncementAllViewModel> model;
+            if (user == null)
+            {
+                model = await repository
+                                .All<Announcement>()
+                                .Include(p => p.Pet)
+                                .OrderBy(a => a.DayStarting)
+                                .Where(p => p.Pet.OwnerId != userId &&
+                                    p.Pet.IsApproved == true &&
+                                    p.Requests.All(a => a.IsConfirmed == false))
+                                .Select(p => new AnnouncementAllViewModel
+                                {
+                                    Id = p.Id,
+                                    OwnerId = p.Pet.OwnerId,
+                                    Name = p.Pet.Name,
+                                    Description = p.Pet.Description,
+                                    ImageUrl = p.Pet.ImageUrl,
+                                    Heigth = p.Pet.Heigth,
+                                    Weigth = p.Pet.Heigth,
+                                    Type = p.Pet.Type.ToString(),
+                                    DateStartBabysitting = p.DayStarting.ToString("d"),
+                                    DateEndBabysitting = p.DayEnding.ToString("d"),
+                                    OwnerName = $"{p.Pet.Owner.FirstName} {p.Pet.Owner.LastName}"
+                                })
+                                .ToListAsync();
+            }
+            else
+            {
+                model = await repository
+                                .All<Announcement>()
+                                .Include(p => p.Pet)
+                                .OrderBy(a => a.DayStarting)
+                                .Where(p => p.Pet.OwnerId != userId &&
+                                    p.Pet.IsApproved == true &&
+                                    p.Requests.All(a => a.IsConfirmed == false) &&
+                                    p.Pet.Owner.TownId == user.TownId
+                                    )
+                                .Select(p => new AnnouncementAllViewModel
+                                {
+                                    Id = p.Id,
+                                    OwnerId = p.Pet.OwnerId,
+                                    Name = p.Pet.Name,
+                                    Description = p.Pet.Description,
+                                    ImageUrl = p.Pet.ImageUrl,
+                                    Heigth = p.Pet.Heigth,
+                                    Weigth = p.Pet.Heigth,
+                                    Type = p.Pet.Type.ToString(),
+                                    DateStartBabysitting = p.DayStarting.ToString("d"),
+                                    DateEndBabysitting = p.DayEnding.ToString("d"),
+                                    OwnerName = $"{p.Pet.Owner.FirstName} {p.Pet.Owner.LastName}"
+                                })
+                                .ToListAsync();
+            }
 
             return model;
         }
@@ -179,9 +204,7 @@ namespace WebApp2022.Core.Services
         {
             var model = await repository.All<Announcement>()
                 .Include(p => p.Pet)
-                .Where(p => p.Pet.IsApproved == true &&
-                    p.Pet.IsBabysittedNow == false &&
-                    p.Pet.NeedBabysitting == true)
+                .Where(p => p.Pet.IsApproved == true)
                 .Include(p => p.Pet.Owner)
                 .Select(p => new AnnouncementDetailsViewModel
                 {

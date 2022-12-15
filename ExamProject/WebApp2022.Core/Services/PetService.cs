@@ -32,9 +32,7 @@ namespace WebApp2022.Core.Services
                 Weigth = model.Weigth,
                 OwnerId = userId,
                 DateAdded = DateTime.UtcNow,
-                IsApproved = false,
-                IsBabysittedNow = false,
-                NeedBabysitting = false
+                IsApproved = false
             };
             AnimalType type;
 

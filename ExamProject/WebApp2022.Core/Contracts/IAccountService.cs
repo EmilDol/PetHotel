@@ -9,7 +9,6 @@ namespace WebApp2022.Core.Contracts
         Task Edit(EditAccountViewModel model, string userId);
         Task<bool> Exists(string id);
         Task<DetailsAccountViewModel> Details(string id);
-        Task Report(ReportAddViewModel model);
         Task AddComment(CommentAddViewModel model, string userId);
     }
 }

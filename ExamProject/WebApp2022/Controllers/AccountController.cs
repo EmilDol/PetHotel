@@ -161,28 +161,6 @@ namespace WebApp2022.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Report(ReportAddViewModel model)
-        {
-            string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction(nameof(Details), new { id = model.UserId });
-            }
-
-            if (model.UserId == userId)
-            {
-                return RedirectToAction(nameof(Details), new { id = model.UserId });
-            }
-
-            if (!await accountService.Exists(model.UserId))
-            {
-                return BadRequest();
-            }
-
-            await accountService.Report(model);
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
 
         public async Task<IActionResult> AddComment(CommentAddViewModel model)
         {
