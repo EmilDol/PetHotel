@@ -74,7 +74,7 @@ namespace WebApp2022.Core.Services
             pet.IsApproved = false;
             pet.Age = model.Age;
             pet.Requirements = model.Requirements;
-            pet.Heigth = model.Heigth;
+            pet.Heigth = model.Heigth; 
             pet.Weigth = model.Weigth;
             pet.ImageUrl = model.ImageUrl;
             pet.Type = type;

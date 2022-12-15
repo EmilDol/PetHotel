@@ -18,14 +18,6 @@ namespace WebApp2022.Core.Services
 
         public async Task Add(string name)
         {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
-            {
-                return;
-            }
-            if (await repository.All<Town>().Select(t => t.Name).ContainsAsync(name))
-            {
-                return;
-            }
             var town = new Town
             {
                 IsApproved = false,

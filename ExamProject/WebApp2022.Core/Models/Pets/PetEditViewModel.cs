@@ -24,10 +24,6 @@ namespace WebApp2022.Core.Models.Pets
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateAdded { get; set; }
-
-        [Required]
         public double Heigth { get; set; }
 
         [Required]

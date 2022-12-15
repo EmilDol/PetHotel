@@ -26,6 +26,10 @@ namespace WebApp2022.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string name)
         {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest(name);
+            }
             await townService.Add(name);
             return RedirectToAction(nameof(AccountController.Register), "Account");
         }

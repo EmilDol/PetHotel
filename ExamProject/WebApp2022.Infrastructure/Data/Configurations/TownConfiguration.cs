@@ -22,7 +22,8 @@ namespace WebApp2022.Infrastructure.Data.Configurations
                 new Town
                 {
                     Id = Guid.Parse("651dc286-24dd-473e-8099-a56ad3e7a6e2"),
-                    Name = "Sofia"
+                    Name = "Sofia",
+                    IsApproved = false
                 },
                 new Town
                 {
@@ -39,7 +40,8 @@ namespace WebApp2022.Infrastructure.Data.Configurations
                 new Town
                 {
                     Id = Guid.Parse("d6ce7d29-6f17-478d-af2f-b45fb212dd02"),
-                    Name = "Plovdiv"
+                    Name = "Plovdiv",
+                    IsApproved = false
                 },
                 new Town
                 {

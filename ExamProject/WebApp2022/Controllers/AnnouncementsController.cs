@@ -42,7 +42,7 @@ namespace WebApp2022.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add(Guid id)
+        public IActionResult Add(Guid id)
         {
             var model = new AnnouncementAddViewModel { PetId = id};
 
