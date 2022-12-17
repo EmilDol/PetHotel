@@ -5,15 +5,14 @@
     <img class="card-img-top mt-2" style="width: 18rem;"
          src="@Model.ImageUrl" alt="Pet Image">
     <div class="card-body">
-
         <h5 class="card-title mt-1">@Model.Name</h5>
         <p class="mb-0">
             <strong>Description:</strong> @Model.Description
         </p>
         <p><strong>Type: </strong> @Model.Type</p>
-        <p><strong>Heigth: </strong> @Model.Heigth</p>
-        <p><strong>Weigth: </strong> @Model.Weigth</p>
-        <p><strong>Age: </strong> @Model.Age</p>
+        <p><strong>Heigth: </strong> @Model.Heigth m</p>
+        <p><strong>Weigth: </strong> @Model.Weigth kg</p>
+        <p><strong>Age: </strong> @Model.Age years</p>
         <p><strong>Requirements: </strong> @Model.Requirements</p>
     </div>
     <form class="input-group-sm" asp-area="Administration" asp-route-id="@Model.Id" asp-controller="Pets" asp-action="Approve" method="post">

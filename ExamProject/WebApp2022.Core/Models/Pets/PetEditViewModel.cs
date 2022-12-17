@@ -24,12 +24,15 @@ namespace WebApp2022.Core.Models.Pets
         public string ImageUrl { get; set; } = null!;
 
         [Required]
+        [Display(Name = "Heigth in meters")]
         public double Heigth { get; set; }
 
         [Required]
+        [Display(Name = "Weigth in kilograms")]
         public double Weigth { get; set; }
 
         [Required]
+        [Display(Name = "Age in years")]
         public int Age { get; set; }
 
         [Required]

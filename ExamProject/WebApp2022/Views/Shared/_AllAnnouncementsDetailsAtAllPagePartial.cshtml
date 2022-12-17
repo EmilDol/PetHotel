@@ -14,8 +14,8 @@
         <p><strong>Owner Name: </strong> <a asp-action="Details" asp-controller="Account" asp-route-id="@Model.OwnerId">@Model.OwnerName</a></p>
         <p><strong>Date Starting: </strong> @Model.DateStartBabysitting</p>
         <p><strong>Date Ending: </strong> @Model.DateEndBabysitting</p>
-        <p><strong>Heigth: </strong> @Model.Heigth</p>
-        <p><strong>Weigth: </strong> @Model.Weigth</p>
+        <p><strong>Heigth: </strong> @Model.Heigth m</p>
+        <p><strong>Weigth: </strong> @Model.Weigth kg</p>
     </div>
 
     <form class="input-group-sm" asp-route-id="@Model.Id" asp-controller="Announcements" asp-action="Details" method="get">

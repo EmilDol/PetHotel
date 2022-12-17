@@ -14,6 +14,7 @@ namespace WebApp2022.Core.Models.Announcements
 
         public string ImageUrl { get; set; } = null!;
 
+        [Display(Name = "Owner Name")]
         public string OwnerName { get; set; } = null!;
 
         public string DateStartBabysitting { get; set; } = null!;
