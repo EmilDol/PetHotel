@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ganss.Xss;
+
+using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Announcements;
@@ -20,15 +22,16 @@ namespace WebApp2022.Core.Services
 
         public async Task Add(PetAddViewModel model, string userId)
         {
+            var sanitizer = new HtmlSanitizer();
             var pet = new Pet
             {
                 Id = model.Id,
                 Age = model.Age,
-                Description = model.Description,
+                Description = sanitizer.Sanitize(model.Description),
                 Heigth = model.Heigth,
                 ImageUrl = model.ImageUrl,
-                Name = model.Name,
-                Requirements = model.Requirements,
+                Name = sanitizer.Sanitize(model.Name),
+                Requirements = sanitizer.Sanitize(model.Requirements),
                 Weigth = model.Weigth,
                 OwnerId = userId,
                 DateAdded = DateTime.UtcNow,
@@ -57,7 +60,7 @@ namespace WebApp2022.Core.Services
             {
                 return;
             }
-
+            var sanitizer = new HtmlSanitizer();
             AnimalType type;
 
             bool result = Enum.TryParse(model.Type, out type);
@@ -69,14 +72,14 @@ namespace WebApp2022.Core.Services
 
             pet.Type = type;
 
-            pet.Name = model.Name;
-            pet.Description = model.Description;
+            pet.Name = sanitizer.Sanitize(model.Name);
+            pet.Description = sanitizer.Sanitize(model.Description);
             pet.IsApproved = false;
             pet.Age = model.Age;
-            pet.Requirements = model.Requirements;
+            pet.Requirements = sanitizer.Sanitize(model.Requirements);
             pet.Heigth = model.Heigth; 
             pet.Weigth = model.Weigth;
-            pet.ImageUrl = model.ImageUrl;
+            pet.ImageUrl = sanitizer.Sanitize(model.ImageUrl);
             pet.Type = type;
 
             await repository.SaveChangesAsync();

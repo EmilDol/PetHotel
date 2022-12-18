@@ -1,5 +1,7 @@
 ﻿using System.Security.Claims;
 
+using Ganss.Xss;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -55,14 +57,15 @@ namespace WebApp2022.Controllers
             {
                 return View(model);
             }
+            var sanitizer = new HtmlSanitizer();
 
             var user = new ApplicationUser()
             {
-                Email = model.Email,
-                UserName = model.UserName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,
+                Email = sanitizer.Sanitize(model.Email),
+                UserName = sanitizer.Sanitize(model.UserName),
+                FirstName = sanitizer.Sanitize(model.FirstName),
+                LastName = sanitizer.Sanitize(model.LastName),
+                PhoneNumber = sanitizer.Sanitize(model.PhoneNumber),
                 TownId = Guid.Parse(model.Town)
             };
 

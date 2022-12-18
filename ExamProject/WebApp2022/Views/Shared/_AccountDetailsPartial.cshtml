@@ -6,7 +6,7 @@
     <div class="col-md-4 offset-md-4">
         <h5 class="card-title mt-1">@Model.FullName</h5>
         <p class="mb-2">
-            <strong>Email: </strong> @Model.Email
+            <strong>Email: </strong><%= Html.Encode(@Model.Email) %>
         </p>
         <p class="mb-2">
             <strong>Phone number: </strong> @Model.PhoneNumber

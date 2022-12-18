@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ganss.Xss;
+
+using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Account;
@@ -68,18 +70,19 @@ namespace WebApp2022.Core.Services
 
         public async Task Edit(EditAccountViewModel model, string userId)
         {
+            var sanitizer = new HtmlSanitizer();
             var user = await repository.All<ApplicationUser>().FirstAsync(u => u.Id == userId);
 
-            user.UserName = model.UserName;
-            user.PhoneNumber = model.PhoneNumber;
+            user.UserName = sanitizer.Sanitize(model.UserName);
+            user.PhoneNumber = sanitizer.Sanitize(model.PhoneNumber);
             user.PhoneNumberConfirmed = false;
-            user.FirstName = model.FirstName;
+            user.FirstName = sanitizer.Sanitize(model.FirstName);
             user.Email = model.Email;
             user.EmailConfirmed = false;
-            user.LastName = model.LastName;
+            user.LastName = sanitizer.Sanitize(model.LastName);
             user.TownId = Guid.Parse(model.Town);
-            user.NormalizedEmail = model.Email.ToUpper();
-            user.NormalizedUserName = model.UserName.ToUpper();
+            user.NormalizedEmail = sanitizer.Sanitize(model.Email.ToUpper());
+            user.NormalizedUserName = sanitizer.Sanitize(model.UserName.ToUpper());
 
             await repository.SaveChangesAsync();
         }

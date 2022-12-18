@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ganss.Xss;
+
+using Microsoft.EntityFrameworkCore;
 
 using WebApp2022.Core.Contracts;
 using WebApp2022.Core.Models.Towns;
@@ -18,10 +20,12 @@ namespace WebApp2022.Core.Services
 
         public async Task Add(string name)
         {
+            var sanitizer = new HtmlSanitizer();
+
             var town = new Town
             {
                 IsApproved = false,
-                Name = name,
+                Name = sanitizer.Sanitize(name),
                 Id = Guid.NewGuid()
             };
             await repository.AddAsync(town);
